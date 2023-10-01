@@ -44,4 +44,5 @@ Route::group(['prefix'=>'admin/profile', 'middleware' => 'auth'], function () {
 Route::group([], function () {
     //Route::resource('user', 'App\Http\Controllers\backoffice\UserController', ['except' => ['show']]);
     Route::get('friends', ['as' => 'friends', 'uses' => 'App\Http\Controllers\frontoffice\TestController@friends']);
+    Route::get('newsfeed', ['as' => 'newsfeed', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@index']);
 });
