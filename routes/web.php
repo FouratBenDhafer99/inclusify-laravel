@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,4 +49,5 @@ Route::group([], function () {
 });
 
 Route::resource('jobs', JobController::class);
+Route::resource('job-applications', JobApplicationController::class);
 
