@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers\backoffice;
+
+use App\Http\Controllers\Controller;
+use App\Models\User;
+
+class UserController extends Controller
+{
+    /**
+     * Display a listing of the users
+     *
+     * @param  \App\Models\User  $model
+     * @return \Illuminate\View\View
+     */
+    public function index(User $model)
+    {
+        return view('backoffice.users.index', ['users' => $model->paginate(15)]);
+    }
+}
