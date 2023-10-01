@@ -19,6 +19,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// Product Routes
+Route::resource('products', 'ProductController');
+
+// Category Routes
+Route::resource('categories', 'CategoryController');
+
 Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
