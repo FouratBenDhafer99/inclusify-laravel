@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\CategoryEvent; 
 
 class CategoryEventSeeder extends Seeder
 {
@@ -14,6 +14,18 @@ class CategoryEventSeeder extends Seeder
      */
     public function run()
     {
-        //
+        CategoryEvent::create([
+            'name' => 'Category 1',
+        ]);
+
+        CategoryEvent::create([
+            'name' => 'Category 2',
+        ]);
+        
+        for ($i = 3; $i <= 10; $i++) {
+            CategoryEvent::create([
+                'name' => "Category $i",
+            ]);
+        }
     }
 }

@@ -70,7 +70,6 @@ class EventController extends Controller
     public function search(Request $request)
     {
         $query = Event::query();
-        $query->where('name', 'like', '%' . $request->input('search_term') . '%');
         
         $events = $query->get();
 
