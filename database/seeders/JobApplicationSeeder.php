@@ -21,13 +21,11 @@ class JobApplicationSeeder extends Seeder
         //
         $faker = Faker::create();
 
-        // Define the number of job applications you want to seed
         $numberOfApplications = 10;
 
-        // Seed the job applications table with sample data
         for ($i = 0; $i < $numberOfApplications; $i++) {
             JobApplication::create([
-                'job_id' => 1, // Assuming job IDs exist
+                'job_id' => 1, 
                 'resume_path' => 'uploads/resumes/resume.pdf',
                 'motivation' => $faker->paragraph,
                 'status' => $faker->randomElement(['pending', 'accepted', 'rejected']),

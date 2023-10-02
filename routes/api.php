@@ -19,12 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('jobs', [JobApiController::class, 'store']);
+Route::post('jobs', [JobController::class, 'store']);
 
-Route::get('jobs', [JobApiController::class, 'index']);
+Route::get('jobs', [JobController::class, 'index']);
 
-Route::get('jobs/{id}', [JobApiController::class, 'show']);
+Route::get('jobs/{id}', [JobController::class, 'show']);
 
-Route::put('jobs/{id}', [JobApiController::class, 'update']);
+Route::put('jobs/{id}', [JobController::class, 'update']);
 
-Route::delete('jobs/{id}', [JobApiController::class, 'destroy']);
+Route::delete('jobs/{id}', [JobController::class, 'destroy']);

@@ -21,7 +21,6 @@ class JobController extends Controller
         return response()->json(['message' => 'Job created successfully', 'job' => $job], 201);
     }
 
-    // Retrieve a list of job listings
     public function index()
     {
         $jobs = Job::all();
@@ -29,7 +28,6 @@ class JobController extends Controller
         return response()->json(['jobs' => $jobs], 200);
     }
 
-    // Retrieve a specific job listing by ID
     public function show($id)
     {
         $job = Job::findOrFail($id);
@@ -37,7 +35,6 @@ class JobController extends Controller
         return response()->json(['job' => $job], 200);
     }
 
-    // Update a job listing by ID
     public function update(Request $request, $id)
     {
         $data = $request->validate([
@@ -54,7 +51,6 @@ class JobController extends Controller
         return response()->json(['message' => 'Job updated successfully', 'job' => $job], 200);
     }
 
-    // Delete a job listing by ID
     public function destroy($id)
     {
         $job = Job::findOrFail($id);
