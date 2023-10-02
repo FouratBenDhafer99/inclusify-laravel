@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\events\EventController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,25 @@ Route::group([], function () {
     Route::get('friends', ['as' => 'friends', 'uses' => 'App\Http\Controllers\frontoffice\TestController@friends']);
     Route::get('newsfeed', ['as' => 'newsfeed', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@index']);
 });
+
+
+////////////////////////******************Start E V E N T S********************////////////////////////////////////////
+
+
+// List events
+Route::get('/events', [EventController::class, 'index'])->name('events.index');
+
+// Display a single event
+Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+
+// Create a new event 
+Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+Route::post('/events', [EventController::class, 'store'])->name('events.store');
+
+// Edit an existing event 
+Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
+
+
+
+/////////////////////////******************End E V E N T S********************////////////////////////////////////////
