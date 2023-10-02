@@ -1,4 +1,4 @@
-@extends('backoffice.layouts.app') <!-- Include your app's layout template -->
+@extends('backoffice.layouts.app')
 
 @section('content')
 <div class="container">
@@ -6,18 +6,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Title</th>
+                <th>Name</th>
                 <th>Date</th>
-                <!-- Add more table headers for other attributes -->
+                <th>Location</th>
+                <th>Organizer</th>
+                <th>Status</th>
+                <th>Capacity</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($events as $event)
             <tr>
-                <td>{{ $event->title }}</td>
+                <td>{{ $event->name }}</td>
                 <td>{{ $event->date }}</td>
-                <!-- Add more table cells for other attributes -->
+                <td>{{ $event->location }}</td>
+                <td>{{ $event->organizer }}</td>
+                <td>{{ $event->status }}</td>
+                <td>{{ $event->capacity }}</td>
                 <td>
                     <a href="{{ route('events.show', $event->id) }}" class="btn btn-info">View</a>
                     <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">Edit</a>

@@ -10,7 +10,7 @@ class EventController extends Controller
     // Display a listing of events.
     public function index()
     {
-        $events = Event::all(); // You can customize this query for pagination or filtering.
+        $events = Event::all(); 
 
         return view('events.index', compact('events'));
     }

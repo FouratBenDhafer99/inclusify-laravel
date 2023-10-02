@@ -60,7 +60,7 @@ Route::get('/events/{event}', [EventController::class, 'show'])->name('events.sh
 
 // Create a new event 
 Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
-Route::post('/events', [EventController::class, 'store'])->name('events.store');
+//Route::post('/events', [EventController::class, 'store'])->name('events.store');
 
 // Edit an existing event 
 Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');

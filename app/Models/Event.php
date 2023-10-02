@@ -21,6 +21,5 @@ class Event extends Model
         'capacity',
         'registration_deadline',
         'image',
-        'creation_date',
     ];
 }
