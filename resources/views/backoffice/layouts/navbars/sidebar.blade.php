@@ -36,6 +36,12 @@
                 </div>
             </li>
             <li >
+                <a href="{{ route('events.index') }}">
+                <i class="fas fa-calendar-alt"></i> 
+                <p>{{ __('Events') }}</p>
+                </a>
+            </li>
+            <li >
                 <a href="{{ route('pages.icons') }}">
                     <i class="tim-icons icon-atom"></i>
                     <p>{{ __('Icons') }}</p>

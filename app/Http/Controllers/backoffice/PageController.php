@@ -75,4 +75,14 @@ class PageController extends Controller
     {
         return view('backoffice.pages.upgrade');
     }
+
+     /**
+     * Display icons page
+     *
+     * @return \Illuminate\View\View
+     */
+    public function events()
+    {
+        return view('backoffice.events.index');
+    }
 }

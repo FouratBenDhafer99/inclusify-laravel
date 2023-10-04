@@ -27,6 +27,7 @@ Route::get('/admin/dashboard', 'App\Http\Controllers\HomeController@index')->nam
 
 Route::group(['prefix'=>'admin','middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'App\Http\Controllers\backoffice\PageController@icons']);
+		//Route::get('events', ['as' => 'events.index', 'uses' => 'App\Http\Controllers\backoffice\PageController@events']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'App\Http\Controllers\backoffice\PageController@maps']);
 		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'App\Http\Controllers\backoffice\PageController@notifications']);
 		Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'App\Http\Controllers\backoffice\PageController@rtl']);
@@ -51,21 +52,38 @@ Route::group([], function () {
 
 ////////////////////////******************Start E V E N T S********************////////////////////////////////////////
 
+/*
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+    Route::get('/events', [EventController::class, 'index'])->name('events.index');
+    Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+    Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+    Route::post('/events', [EventController::class, 'store'])->name('events.store');
+    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
+    Route::delete('/events/deleteAll', [EventController::class, 'deleteAll'])->name('events.deleteAll');
+    Route::resource('events', EventController::class);
+});*/
 
 // List events
-Route::get('/events', [EventController::class, 'index'])->name('events.index');
+Route::get('/admin/events', [EventController::class, 'index'])->name('events.index');
 
 // Display a single event
-Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
+Route::get('/admin/events/{event}', [EventController::class, 'show'])->name('events.show');
 
 // Create a new event 
-Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+Route::get('/admin/events/create', [EventController::class, 'create'])->name('events.create');
+//Route::get('/events/create', 'EventController@create');
 //Route::post('/events', [EventController::class, 'store'])->name('events.store');
 
 // Edit an existing event 
-Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
-Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
+Route::get('/admin/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+Route::put('/admin/events/{event}', [EventController::class, 'update'])->name('events.update');
 
+Route::get('/admin/events/search', [EventController::class, 'search'])->name('events.search'); 
 
+Route::delete('/admin/events/deleteAll', [App\Http\Controllers\events\EventController::class, 'deleteAll'])->name('events.deleteAll');
+
+Route::resource('events', EventController::class);
 
 /////////////////////////******************End E V E N T S********************////////////////////////////////////////

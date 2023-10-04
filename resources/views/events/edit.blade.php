@@ -1,4 +1,4 @@
-@extends('backoffice.layouts.app') <!-- Include your app's layout template -->
+@extends('backoffice.layouts.app') 
 
 @section('content')
 <div class="container">
