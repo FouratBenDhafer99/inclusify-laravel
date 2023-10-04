@@ -59,6 +59,7 @@ class EventController extends Controller
             ->with('success', 'Event deleted successfully.');
     }
 
+
     public function search(Request $request)
     {
         $query = $request->input('search');
@@ -69,16 +70,22 @@ class EventController extends Controller
     
     public function deleteAll(Request $request)
     {
-        $selectedEventIds = json_decode($request->input('selectedEvents'));
+        $selectedEventIds = explode(',', $request->input('selectedEvents'));
 
-        if (empty($selectedEventIds)) {
+        // Log the selected IDs for debugging
+        \Log::info('Selected Event IDs: ' . json_encode($selectedEventIds));
+
+        if (!is_array($selectedEventIds)) {
             return redirect()->back()->with('error', 'No events selected for deletion.');
         }
 
-        Event::whereIn('id', $selectedEventIds)->delete();
+        // Use the `destroy` method to delete events by their IDs
+        Event::destroy($selectedEventIds);
 
         return redirect()->route('events.index')->with('success', 'Selected events have been deleted.');
     }
 
-
+    
+    
+    
 }
