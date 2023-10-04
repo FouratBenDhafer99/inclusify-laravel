@@ -1,16 +1,50 @@
 @extends('backoffice.layouts.app')
 
 @section('content')
+
+<!--***************************************************************************************************************************************
+*******************************************************       EVENTS       ****************************************************************
+****************************************************************************************************************************************-->
+
+<style>
+    #noEventsMessage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+        font-size: 18px;
+    }
+
+    .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+</style>
+
+
 <div class="container">
+    <h1>Events</h1>
+
     <div class="form-group">
         <input type="text" id="searchInput" class="form-control" placeholder="Search Events">
     </div>
 
-    <h1>Events</h1>
-
     <div id="noEventsMessage" style="display: none;">
-        No events found. Please try again.
+        <div class="center-content">
+            <h2>The searched product is either not existent or no longer available, <br>unless you have a time travel machine.<br></h2>
+            <img src="{{ asset('frontoffice/images/noevents.png') }}" alt="No Events Found">
+        </div>
     </div>
+
 
     @if (count($events) === 0)
         <p>No events found.</p>
@@ -93,6 +127,8 @@
 </form>
 
 
+
+
 @endsection
 
 
@@ -103,31 +139,37 @@
     $(document).ready(function () {
         var searchInput = $('#searchInput');
         var noEventsMessage = $('#noEventsMessage');
-        var tableBody = $('tbody'); 
+        var table = $('table'); // Select the entire table, including the header row
+
         searchInput.on('keyup', function () {
-            var query = $(this).val().toLowerCase(); 
+            var query = $(this).val().toLowerCase();
             var eventsFound = false;
 
-            tableBody.find('tr').each(function () {
-                var eventRow = $(this).text().toLowerCase(); 
+            table.find('tr').each(function () {
+                var eventRow = $(this).text().toLowerCase();
                 if (eventRow.indexOf(query) === -1) {
                     $(this).hide();
                 } else {
                     $(this).show();
-                    eventsFound = true; 
+                    eventsFound = true;
                 }
             });
 
             if (eventsFound) {
                 noEventsMessage.hide();
-                tableBody.show();
+                table.show();
+                $('#removeAllButton').show(); // Show the "Remove All" button
+                $('.btn.btn-success').show(); // Show the "Create New Event" button
             } else {
                 noEventsMessage.show();
-                tableBody.hide();
+                table.hide();
+                $('#removeAllButton').hide(); // Hide the "Remove All" button
+                $('.btn.btn-success').hide(); // Hide the "Create New Event" button
             }
         });
     });
 </script>
+
 
 
 <script>
