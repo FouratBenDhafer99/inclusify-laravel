@@ -15,8 +15,8 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
-
+    'name' => env('APP_NAME', 'Inclusify'),
+    'backoffice_name' =>env('APP_BACKOFFICE', 'Administration'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
