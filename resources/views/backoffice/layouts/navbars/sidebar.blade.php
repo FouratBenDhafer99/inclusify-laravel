@@ -32,6 +32,12 @@
                                 <p>{{ __('User Management') }}</p>
                             </a>
                         </li>
+                        <li >
+                            <a href="{{ route('jobs.list')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ __('Job Management') }}</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

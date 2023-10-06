@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Job; // Import the Job model
+
 
 class JobController extends Controller
 {
@@ -25,14 +27,16 @@ class JobController extends Controller
     {
         $jobs = Job::all();
 
-        return response()->json(['jobs' => $jobs], 200);
-    }
+        return view('backoffice.jobs.list', compact('jobs'));    }
 
     public function show($id)
     {
-        $job = Job::findOrFail($id);
+        $jobs = Job::findOrFail($id);
 
-        return response()->json(['job' => $job], 200);
+        //return the view
+        return view('jobs.list', compact('jobs'));
+
+
     }
 
     public function update(Request $request, $id)
