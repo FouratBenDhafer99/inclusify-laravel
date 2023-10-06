@@ -1,12 +1,7 @@
-@extends('backoffice.layouts.app', ['page' => __('Jobs'), 'pageSlug' => 'jobs'])
-
+@extends('backoffice.jobs.list')
 @section('content')
 
-
-                        <div class="row">
-    <div class="col-md-12">
-        <div class="card ">
-            <div class="card-header">
+<div class="card-header">
                 <div class="row">
                     <div class="col-8">
                         <h4 class="card-title">Job Offers</h4>
@@ -18,7 +13,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="addJobModal" tabindex="-1" role="dialog" aria-labelledby="addJobModalLabel" aria-hidden="true">
+<div class="modal fade" id="addJobModal" tabindex="-1" role="dialog" aria-labelledby="addJobModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -63,54 +58,3 @@
         </div>
     </div>
 </div>
-@if(session('success'))
-    <div id="myAlert" class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
-            <div class="card-body">
-
-                <div class="">
-                    <table class="table tablesorter " id="">
-                        <thead class=" text-primary">
-                        <tr>
-                                <th scope="col">Title</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Salary Range</th>
-                                <th scope="col">Company</th>
-                                <th scope="col">Address</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($jobs as $job)
-                            <tr>
-                                <td>{{ $job->title }}</td>
-                                <td>{{ $job->description }}</td>
-                                <td>{{ $job->salaryRange }}</td>
-                                <td>{{ $job->company }}</td>
-                                <td>{{ $job->address }}</td>
-                            </tr>
-                            @endforeach
-                          </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="card-footer py-4">
-                <nav class="d-flex justify-content-end" aria-label="...">
-
-                </nav>
-            </div>
-        </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $("#myAlert").fadeIn();
-
-        setTimeout(function() {
-            $("#myAlert").fadeOut();
-        }, 3000);
-    });
-</script>
-
-    @endsection

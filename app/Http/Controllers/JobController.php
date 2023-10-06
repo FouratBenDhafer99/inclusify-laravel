@@ -20,8 +20,8 @@ class JobController extends Controller
 
         $job = Job::create($data);
 
-        return response()->json(['message' => 'Job created successfully', 'job' => $job], 201);
-    }
+        return redirect()->route('jobs.list')->with('success', 'Job created successfully');
+        }
 
     // Retrieve a list of job listings
     public function index()
