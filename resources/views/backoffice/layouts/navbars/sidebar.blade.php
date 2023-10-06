@@ -15,10 +15,10 @@
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Laravel Examples') }}</span>
-                    <b class="caret mt-1"></b>
+                        <b class="caret mt-1"></b>
                 </a>
 
-                <div class="collapse show" id="laravel-examples">
+                <div class="collapse" id="laravel-examples">
                     <ul class="nav pl-4">
                         <li  class="active ">
                             <a href="{{ route('profile.edit')  }}">
@@ -30,6 +30,30 @@
                             <a href="{{ route('user.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ __('User Management') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#skills-quizzes" aria-expanded="true">
+                    <i class="tim-icons icon-trophy" ></i>
+                    <span class="nav-link-text" >{{ __('Skills & Quizzes') }}</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse" id="skills-quizzes">
+                    <ul class="nav pl-4">
+                        <li  class="active ">
+                            <a href="{{ route('admin.skill.list')  }}">
+                                <i class="tim-icons icon-spaceship"></i>
+                                <p>{{ __('Skills') }}</p>
+                            </a>
+                        </li>
+                        <li >
+                            <a>
+                                <i class="tim-icons icon-puzzle-10"></i>
+                                <p>{{ __('Quizzes') }}</p>
                             </a>
                         </li>
                     </ul>
