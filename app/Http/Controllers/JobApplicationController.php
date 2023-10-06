@@ -9,17 +9,14 @@ class JobApplicationController extends Controller
     //
     public function store(Request $request)
 {
-    // Validate the incoming request data
     $data = $request->validate([
         'job_id' => 'required|exists:jobs,id',
-        'resume' => 'required|file|mimes:pdf,doc,docx', // Define the allowed file types
+        'resume' => 'required|file|mimes:pdf,doc,docx', 
         'motivation' => 'required',
     ]);
 
-    // Handle file upload and storage
     $resumePath = $request->file('resume')->store('resumes');
 
-    // Create the job application record
     $jobApplication = JobApplication::create([
         'job_id' => $data['job_id'],
         'resume_path' => $resumePath,
@@ -30,7 +27,6 @@ class JobApplicationController extends Controller
         ->with('success', 'Job application submitted successfully.');
 }
 
-// Retrieve a list of job applications
 public function index()
 {
     $jobApplications = JobApplication::all();
@@ -39,7 +35,6 @@ public function index()
 
 }
 
-// Retrieve a specific job application by ID
 public function show($id)
 {
     $jobApplication = JobApplication::findOrFail($id);
@@ -47,7 +42,6 @@ public function show($id)
     return view('job-applications.show', compact('jobApplication'));
 }
 
-// Update a job application by ID
 public function update(Request $request, $id)
 {
     $data = $request->validate([
@@ -61,7 +55,6 @@ public function update(Request $request, $id)
         ->with('success', 'Job application updated successfully.');
 }
 
-// Delete a job application by ID
 public function destroy($id)
 {
     $jobApplication = JobApplication::findOrFail($id);
