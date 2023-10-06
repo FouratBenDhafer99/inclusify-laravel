@@ -37,7 +37,7 @@ class SkillController extends Controller
         return back()->withStatus(__('Skill successfully updated. '));
     }
 
-    public function deleteSkill($id, SkillRequest $request)
+    public function deleteSkill($id)
     {
         Skill::where('id',$id)->delete();
         return back()->withStatus(__('Skill successfully deleted. '));

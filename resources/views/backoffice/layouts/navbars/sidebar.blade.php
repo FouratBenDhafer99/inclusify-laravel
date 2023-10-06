@@ -45,13 +45,13 @@
                 <div class="collapse" id="skills-quizzes">
                     <ul class="nav pl-4">
                         <li  class="active ">
-                            <a href="{{ route('skill.list')  }}">
+                            <a href="{{ route('admin.skill.list')  }}">
                                 <i class="tim-icons icon-spaceship"></i>
                                 <p>{{ __('Skills') }}</p>
                             </a>
                         </li>
                         <li >
-                            <a href="{{ route('user.index')  }}">
+                            <a>
                                 <i class="tim-icons icon-puzzle-10"></i>
                                 <p>{{ __('Quizzes') }}</p>
                             </a>

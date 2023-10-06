@@ -41,11 +41,12 @@ Route::group(['prefix'=>'admin/profile', 'middleware' => 'auth'], function () {
 	Route::put('password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\backoffice\ProfileController@password']);
 });
 
-Route::group(['prefix'=>'admin/skills', 'middleware' => 'auth'], function () {
-    Route::get('', ['as' => 'skill.list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
-    Route::get('form/{id?}', ['as' => 'skill.form', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillForm']);
-    Route::post('add', ['as' => 'skill.add', 'uses' => 'App\Http\Controllers\backoffice\SkillController@addSkill']);
-    Route::put('update/{id}', ['as' => 'skill.update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);
+Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'auth'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
+    Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillForm']);
+    Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\SkillController@addSkill']);
+    Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);
+    Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\SkillController@deleteSkill']);
 });
 
 Route::group([], function () {

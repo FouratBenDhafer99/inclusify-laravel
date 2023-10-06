@@ -17,9 +17,9 @@
                 <form
                     method="post"
                     @if($skill)
-                        action="{{ route('skill.update', $skill->id) }}"
+                        action="{{ route('admin.skill.update', $skill->id) }}"
                     @else
-                        action="{{ route('skill.add') }}"
+                        action="{{ route('admin.skill.add') }}"
                     @endif
                 >
                     <div class="card-body">
