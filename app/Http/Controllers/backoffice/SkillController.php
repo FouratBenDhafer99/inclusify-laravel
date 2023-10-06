@@ -11,12 +11,6 @@ use Illuminate\Http\Request;
 class SkillController extends Controller
 {
 
-    public function skillList()
-    {
-        //$skills= Skill::with('createdBy')->get();
-        $skills= Skill::all();
-        return view('backoffice.pages.skills.skill_list', ['skills'=>$skills]);
-    }
     public function skillForm($id = null)
     {
         $skill= Skill::find($id);

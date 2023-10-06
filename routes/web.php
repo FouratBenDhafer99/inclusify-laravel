@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Skill;
+use App\Models\Question;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,11 +44,20 @@ Route::group(['prefix'=>'admin/profile', 'middleware' => 'auth'], function () {
 });
 
 Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'auth'], function () {
-    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
+    //Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
+    Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\SkillController@addSkill']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\SkillController@deleteSkill']);
+});
+
+Route::group(['prefix'=>'admin/questions', 'as'=>'admin.question.', 'middleware' => 'auth'], function () {
+    Route::view('', 'backoffice.pages.questions.question_list', ['questions' => Question::with('skill')->get()])->name('list');
+    Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@questionForm']);
+    Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@addQuestion']);
+    /*Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);
+    Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\SkillController@deleteSkill']);*/
 });
 
 Route::group([], function () {
