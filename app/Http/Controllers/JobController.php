@@ -33,8 +33,7 @@ class JobController extends Controller
     {
         $jobs = Job::findOrFail($id);
 
-        //return the view
-        return view('jobs.list', compact('jobs'));
+        return view('backoffice.jobs.list', compact('jobs'));
 
 
     }
@@ -52,14 +51,23 @@ class JobController extends Controller
         $job = Job::findOrFail($id);
         $job->update($data);
 
-        return response()->json(['message' => 'Job updated successfully', 'job' => $job], 200);
+        return redirect()->route('jobs.index', $job->id)->with('success', 'Job updated successfully');
     }
+
+
+// ...
 
     public function destroy($id)
     {
-        $job = Job::findOrFail($id);
+        $job = Job::find($id);
+
+        if (!$job) {
+            return redirect()->route('jobs.index')->with('error', 'Job not found');
+        }
+
         $job->delete();
 
-        return response()->json(['message' => 'Job deleted successfully'], 200);
+        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully');
     }
+
 }
