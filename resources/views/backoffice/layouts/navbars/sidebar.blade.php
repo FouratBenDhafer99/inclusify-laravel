@@ -42,12 +42,18 @@
                     <b class="caret mt-1"></b>
                 </a>
 
-                <div class="collapse" id="skills-quizzes">
+                <div class="collapse dropdown" id="skills-quizzes">
                     <ul class="nav pl-4">
-                        <li  class="active ">
+                        <li>
                             <a href="{{ route('admin.skill.list')  }}">
                                 <i class="tim-icons icon-spaceship"></i>
                                 <p>{{ __('Skills') }}</p>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('admin.question.list')  }}">
+                                <i class="tim-icons icon-pencil"></i>
+                                <p>{{ __('Questions') }}</p>
                             </a>
                         </li>
                         <li >

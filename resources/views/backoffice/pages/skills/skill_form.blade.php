@@ -24,7 +24,7 @@
                 >
                     <div class="card-body">
                         @csrf
-                        @if(isset($skill))
+                        @if($skill)
                             @method('put')
                         @else
                             @method('post')
@@ -37,12 +37,7 @@
                             <input type="text" name="name"
                                    class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"
                                    placeholder="{{ __('Name') }}"
-                                   @if($skill)
-                                       value="{{ old('name', $skill->name) }}"
-                                   @else
-                                       value="{{ old('name') }}"
-                                   @endif
-
+                                   value="{{ old('name', $skill?->name) }}"
                             >
                             @include('backoffice.alerts.feedback', ['field' => 'name'])
                         </div>
