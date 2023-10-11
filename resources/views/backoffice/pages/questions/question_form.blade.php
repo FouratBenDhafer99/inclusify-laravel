@@ -12,12 +12,13 @@
                             Add
                         @endif
                         Question
+                        {{$question}}
                     </h5>
                 </div>
                 <form
                     method="post"
                     @if($question)
-                        action="{{ route('admin.skill.update', $question->id) }}"
+                        action="{{ route('admin.question.update', $question->id) }}"
                     @else
                         action="{{ route('admin.question.add') }}"
                     @endif
@@ -37,7 +38,7 @@
                             <textarea name="description"
                                       class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}"
                                       placeholder="{{ __('Description') }}"
-                            >@if($question){{ old('description', $question->description) }}@else{{ old('description') }}@endif</textarea>
+                            >{{ old('description', $question?->description) }}</textarea>
                             @include('backoffice.alerts.feedback', ['field' => 'description'])
                         </div>
 
@@ -59,10 +60,12 @@
                                 <div class="row">
                                     <input type="text" class="col form-control mb-1 {{ $errors->has('answers') ? ' is-invalid' : '' }}
                                 {{ $errors->has('answers.'.$i) ? ' is-invalid' : '' }}"
-                                           name="answers[{{$i}}]" value="{{ old('answers.'.$i) }}"
+                                           name="answers[{{$i}}]"
+                                           value="{{ old('answers.'.$i, $question->answers[$i]->text??'') }}"
                                            placeholder="Answer N° {{$i+1}}">
                                     <input type="checkbox" class="col-sm-2 form-control" title="Is a correct answer"
-                                           name="isCorrect[{{$i}}]" @checked(old('isCorrect.'.$i))>
+                                           name="isCorrect[{{$i}}]"
+                                        @checked(old('isCorrect.'.$i, $question?->answers[$i]?->isCorrect??''))>
                                 </div>
                             @endfor
                                 @include('backoffice.alerts.feedback', ['field' => 'answers'])

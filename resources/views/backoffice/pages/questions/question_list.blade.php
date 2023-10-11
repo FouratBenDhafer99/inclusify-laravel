@@ -59,7 +59,7 @@
                                             </td>
                                             <td class="text-primary">
                                                 <button class="btn btn-sm btn-primary">See quizzes</button>
-                                                <a href="{{ route('admin.skill.form', $question->id) }}"
+                                                <a href="{{ route('admin.question.form', $question->id) }}"
                                                    class="btn btn-sm btn-info text-white">Edit</a>
                                                 <a href="{{ route('admin.skill.delete', $question->id) }}"
                                                    class="btn btn-sm btn-danger text-white">Delete</a>
