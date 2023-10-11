@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\JobApplication;
 class JobApplicationController extends Controller
 {
     //
@@ -31,7 +32,7 @@ public function index()
 {
     $jobApplications = JobApplication::all();
 
-    return view('job-applications.index', compact('jobApplications'));
+    return view('backoffice.jobs.jobAppList', compact('jobApplications'));
 
 }
 

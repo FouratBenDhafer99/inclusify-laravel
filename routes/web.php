@@ -38,6 +38,7 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'], function () {
 		Route::post('jobs', ['as' => 'jobs.store', 'uses' => 'App\Http\Controllers\JobController@store']);
 		Route::delete('jobs/{id}', 'JobController@destroy')->name('jobs.destroy');
 		Route::put('jobs/{id}', 'JobController@update')->name('jobs.update');
+		Route::get('jobApplications', ['as' => 'jobs.jobAppList', 'uses' => 'App\Http\Controllers\JobApplicationController@index']);
 });
 
 Route::group(['prefix'=>'admin/profile', 'middleware' => 'auth'], function () {
