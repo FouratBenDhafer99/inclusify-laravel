@@ -15,14 +15,15 @@ return new class extends Migration
     {
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
-            $table->text('score');
-            $table->integer('isSuccessful');
+            $table->float('score')->default(0);
+            $table->integer('isSuccessful')->default(false);
+            $table->integer('isFinished')->default(false);
             $table->unsignedBigInteger('skill_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
 
             $table->foreign('skill_id')->references('id')->on('skills')->cascadeOnDelete();
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
         });
     }
 

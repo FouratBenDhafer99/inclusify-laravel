@@ -61,6 +61,13 @@ Route::group(['prefix'=>'admin/questions', 'as'=>'admin.question.', 'middleware'
 });
 
 //Frontoffice
+Route::group(['prefix'=>'skills', 'as'=>'skill.', 'middleware' => 'auth'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@listSkills']);
+    Route::get('start/{skillId}', ['as' => 'start_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@startQuiz']);
+    Route::get('play/{skillId}', ['as' => 'play_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@playQuiz']);
+    Route::put('submit/{quizId}', ['as' => 'submit_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@submitQuiz']);
+    Route::get('result/{quizId}', ['as' => 'result_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@resultQuiz']);
+});
 
 Route::group(['middleware' => 'auth'], function () {
     //Route::resource('user', 'App\Http\Controllers\backoffice\UserController', ['except' => ['show']]);

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Skill;
 use Database\Factories\SkillFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SkillSeeder extends Seeder
 {
@@ -15,9 +16,22 @@ class SkillSeeder extends Seeder
      */
     public function run()
     {
-        /*DB::table('skill')->insert([
+        DB::table('skills')->insert([[
+            'id' => 1,
             'name' => 'JavaScript',
-        ]);*/
-        Skill::factory(5)->create();
+            'created_at' => now(),
+            'updated_at' => now()
+        ],[
+            'id' => 2,
+            'name' => 'Java',
+            'created_at' => now(),
+            'updated_at' => now()
+        ],[
+            'id' => 3,
+            'name' => 'React',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]]);
+        //Skill::factory(5)->create();
     }
 }

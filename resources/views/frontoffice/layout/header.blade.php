@@ -82,8 +82,8 @@
                         <li><a href="{{url("/newsfeed")}}" class="nav-content-bttn open-font"><i
                                     class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a>
                         </li>
-                        <li><a to="/defaultbadge" class="nav-content-bttn open-font"><i
-                                    class="feather-award btn-round-md bg-red-gradiant me-3"></i><span>Badges</span></a>
+                        <li><a href="{{ route('skill.list') }}" class="nav-content-bttn open-font"><i
+                                    class="feather-award btn-round-md bg-red-gradiant me-3"></i><span>Skills</span></a>
                         </li>
                         <li><a to="/defaultstorie" class="nav-content-bttn open-font"><i
                                     class="feather-globe btn-round-md bg-gold-gradiant me-3"></i><span>Explore Stories</span></a>
