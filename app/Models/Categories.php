@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryEvent extends Model
+class Categories extends Model
 {
+    public $timestamps = false; // Disable timestamps
+
     protected $fillable = [
         'name',
     ];
-
 }

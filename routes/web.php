@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\events\EventController;
+use App\Http\Controllers\events\CategorieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,18 +52,6 @@ Route::group([], function () {
 
 
 ////////////////////////******************Start E V E N T S********************////////////////////////////////////////
-/*
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::get('/events', [EventController::class, 'index'])->name('events.index');
-    Route::get('/events/{event}', [EventController::class, 'show'])->name('events.show');
-    Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
-    Route::post('/events', [EventController::class, 'store'])->name('events.store');
-    Route::get('/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
-    Route::put('/events/{event}', [EventController::class, 'update'])->name('events.update');
-    Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
-    Route::delete('/events/deleteAll', [EventController::class, 'deleteAll'])->name('events.deleteAll');
-    Route::resource('events', EventController::class);
-});*/
 
 Route::middleware(['web'])->group(function () {
     Route::get('/admin/events', [EventController::class, 'index'])->name('events.index');
@@ -75,6 +64,13 @@ Route::middleware(['web'])->group(function () {
     Route::post('/admin/events/deleteAll', [App\Http\Controllers\events\EventController::class, 'deleteAll'])->name('events.deleteAll');
     Route::delete('/admin/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     Route::resource('events', EventController::class);
+
+    Route::get('/admin/categories/create', [CategorieController::class, 'create'])->name('categories.create');
+    Route::post('/admin/categories', [CategorieController::class, 'store'])->name('categories.store');
+    Route::post('/admin/categories/deleteAll', [App\Http\Controllers\events\CategorieController::class, 'deleteAll'])->name('categories.deleteAll');
+    Route::get('/admin/categories/search', [CategorieController::class, 'search'])->name('categories.search'); 
+    Route::resource('categories', CategorieController::class);
+
 });
 
 /////////////////////////******************End E V E N T S********************////////////////////////////////////////

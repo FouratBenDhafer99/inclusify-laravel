@@ -4,15 +4,21 @@ namespace App\Http\Controllers\events;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Models\Categories;
 
 class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::all(); 
-
-        return view('events.index', compact('events'));
+        $categories = Categories::all();
+        $events = Event::all();
+        $data = [
+            'categories' => $categories,
+            'events' => $events,
+        ];
+        return view('events.index', compact('data'));
     }
+
 
     public function create()
     {
@@ -70,22 +76,22 @@ class EventController extends Controller
     
     public function deleteAll(Request $request)
     {
-        $selectedEventIds = explode(',', $request->input('selectedEvents'));
+        $selectedEventIds = $request->input('selectedEvents');
 
-        // Log the selected IDs for debugging
-        \Log::info('Selected Event IDs: ' . json_encode($selectedEventIds));
-
-        if (!is_array($selectedEventIds)) {
-            return redirect()->back()->with('error', 'No events selected for deletion.');
+        if (is_array($selectedEventIds)) {
+            // Multiple events selected for deletion
+            foreach ($selectedEventIds as $eventId) {
+                $event = Event::findOrFail($eventId);
+                $event->delete();
+            }
+        } elseif (!empty($selectedEventIds)) {
+            // Single event selected for deletion
+            $event = Event::findOrFail($selectedEventIds);
+            $event->delete();
         }
 
-        // Use the `destroy` method to delete events by their IDs
-        Event::destroy($selectedEventIds);
-
-        return redirect()->route('events.index')->with('success', 'Selected events have been deleted.');
+        return redirect()->route('events.index')->with('success', 'Event(s) deleted successfully.');
     }
 
-    
-    
     
 }
