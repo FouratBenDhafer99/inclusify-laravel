@@ -53,7 +53,15 @@ class TestController extends Controller
     public function product()
     {
         return view('frontoffice.pages.base.product',
-            //['product'=>(object)['name'=>"Watch"]]
+        //['product'=>(object)['name'=>"Watch"]]
         );
+    }
+
+    public function events()
+    {
+        $events = [
+            (object)["id" => 1, "image" => 'product.png', "name" => 'The party', 'location'=>'Tunis, Tunisia','date' => '31', 'month' => 'APR',],
+        ];
+        return view('frontoffice.pages.base.events', compact('events'));
     }
 }

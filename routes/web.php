@@ -76,4 +76,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('newsfeed', ['as' => 'newsfeed', 'uses' => 'App\Http\Controllers\frontoffice\TestController@newsfeed']);
     Route::get('shop', ['as' => 'shop', 'uses' => 'App\Http\Controllers\frontoffice\TestController@shop']);
     Route::get('product', ['as' => 'product', 'uses' => 'App\Http\Controllers\frontoffice\TestController@product']);
+    Route::get('events', ['as' => 'product', 'uses' => 'App\Http\Controllers\frontoffice\TestController@events']);
 });
