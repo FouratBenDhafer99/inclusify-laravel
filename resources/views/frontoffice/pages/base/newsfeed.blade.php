@@ -1,5 +1,5 @@
 @extends('frontoffice.base')
-
+@section('page_title', 'Newsfeed')
 @section('content')
 <div class="">
     <div class="middle-sidebar-bottom">
