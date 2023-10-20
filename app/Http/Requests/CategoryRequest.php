@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuestionRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
 
         public function messages()
@@ -17,7 +17,7 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'description' => ['required', 'max:255'],
+            'description' => ['required', 'max:500'],
             'name' => ['required', 'max:20'],
         ];
     }

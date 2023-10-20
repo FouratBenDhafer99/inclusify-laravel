@@ -29,6 +29,6 @@ class Product extends Model implements BlamableAwareInterface
 
     public function category()
     {
-        return $this->belongsTo(Caregory::class, 'category_id');
+        return $this->belongsTo(Category::class, 'category_id');
     }
 }
