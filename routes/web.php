@@ -2,6 +2,8 @@
 
 use App\Models\Skill;
 use App\Models\Question;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +59,20 @@ Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'a
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\SkillController@deleteSkill']);
 });
+
+Route::group(['prefix'=>'admin/categories', 'as'=>'admin.category.', 'middleware' => 'auth'], function () {
+    Route::view('', 'backoffice.pages.categories.category_list', ['categories' => Category::all()])->name('list');
+    Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@categoryForm']);
+    Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@addCategory']);
+    Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@updateCategory']);
+    Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@deleteCategory']);
+});
+
+Route::group(['prefix'=>'admin/products', 'as'=>'admin.product.', 'middleware' => 'auth'], function () {
+    Route::view('', 'backoffice.pages.products.product_list', ['products' => Product::all()])->name('list');
+    Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\ProductController@deleteProduct']);
+});
+
 
 Route::group(['prefix'=>'admin/questions', 'as'=>'admin.question.', 'middleware' => 'auth'], function () {
     Route::view('', 'backoffice.pages.questions.question_list', ['questions' => Question::with('skill')->get()])->name('list');
