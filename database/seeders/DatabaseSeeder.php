@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([UsersTableSeeder::class]);
         Job::factory(10)->create();
-
+        $this->call([SkillSeeder::class]);
+        $this->call([QuestionSeeder::class]);
+        $this->call([AnswerSeeder::class]);
     }
 }
