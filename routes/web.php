@@ -23,12 +23,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// Product Routes
-Route::resource('products', 'ProductController');
-
-// Category Routes
-Route::resource('categories', 'CategoryController');
-
 Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Auth::routes();
 
@@ -89,6 +83,14 @@ Route::group(['prefix'=>'skills', 'as'=>'skill.', 'middleware' => 'auth'], funct
     Route::get('play/{skillId}', ['as' => 'play_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@playQuiz']);
     Route::put('submit/{quizId}', ['as' => 'submit_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@submitQuiz']);
     Route::get('result/{quizId}', ['as' => 'result_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@resultQuiz']);
+});
+
+Route::group(['prefix'=>'products', 'as'=>'product.', 'middleware' => 'auth'], function () {
+    Route::view('', 'frontoffice.pages.market.shop',['productList' => Product::all(), 'categoryList' => Category::all() ])->name('list');
+    Route::get('product/{id}', 'App\Http\Controllers\frontoffice\ProductController@show')->name('show');
+    Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@productForm']);
+    Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@addProduct']);
+    Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@updateProduct']);
 });
 
 Route::group(['middleware' => 'auth'], function () {

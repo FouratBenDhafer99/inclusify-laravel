@@ -85,8 +85,8 @@
                         <li><a href="{{ route('skill.list') }}" class="nav-content-bttn open-font"><i
                                     class="feather-award btn-round-md bg-red-gradiant me-3"></i><span>Skills</span></a>
                         </li>
-                        <li><a to="/defaultstorie" class="nav-content-bttn open-font"><i
-                                    class="feather-globe btn-round-md bg-gold-gradiant me-3"></i><span>Explore Stories</span></a>
+                        <li><a href="{{ route('product.list') }}" class="nav-content-bttn open-font"><i
+                                    class="feather-shopping-bag btn-round-md bg-gold-gradiant me-3"></i><span>Marketplace</span></a>
                         </li>
                         <li><a to="/defaultgroup" class="nav-content-bttn open-font"><i
                                     class="feather-zap btn-round-md bg-mini-gradiant me-3"></i><span>Popular Groups</span></a>
