@@ -67,7 +67,7 @@
             </li>
             <li>
                 <a data-toggle="collapse" href="#products-categories" aria-expanded="true">
-                    <i class="tim-icons icon-trophy" ></i>
+                    <i class="tim-icons icon-cart" ></i>
                     <span class="nav-link-text" >{{ __('Products & Categories') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
