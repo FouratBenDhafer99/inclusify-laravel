@@ -13,6 +13,7 @@
 
     <link rel="stylesheet" href="{{ asset('frontoffice') }}/css/themify-icons.css">
     <link rel="stylesheet" href="{{ asset('frontoffice') }}/css/feather.css">
+
     <!-- Custom Stylesheet -->
 
     <link rel="stylesheet" href="{{ asset('frontoffice') }}/css/style.css">

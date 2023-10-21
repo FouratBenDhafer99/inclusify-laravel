@@ -22,9 +22,11 @@ class JobApplicationController extends Controller
         'job_id' => $data['job_id'],
         'resume_path' => $resumePath,
         'motivation' => $data['motivation'],
+        'user_id' => 1,
+        'status' => 'pending',
     ]);
 
-    return redirect()->route('job-applications.index')
+    return redirect()->route('jobslist')
         ->with('success', 'Job application submitted successfully.');
 }
 
@@ -64,6 +66,28 @@ public function destroy($id)
     return redirect()->route('job-applications.index')
         ->with('success', 'Job application deleted successfully.');
 }
+
+
+//front office
+public function create(Request $request)
+{
+    $data = $request->validate([
+        'job_id' => 'required|exists:jobs,id',
+        'resume_path' => 'required|file|mimes:pdf,doc,docx', 
+        'motivation' => 'required',
+    ]);
+
+    $resumePath = $request->file('resume')->store('resumes');
+
+    $jobApplication = JobApplication::create([
+        'job_id' => $data['job_id'],
+        'resume_path' => $resumePath,
+        'motivation' => $data['motivation'],
+       
+    ]);
+
+    
+
 }
 
-
+}

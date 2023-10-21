@@ -70,4 +70,39 @@ class JobController extends Controller
         return redirect()->route('jobs.index')->with('success', 'Job deleted successfully');
     }
 
+    ///front office 
+
+    public function indexFront()
+    {
+        $jobs = Job::all();
+
+        return view('frontOffice.pages.jobslist', compact('jobs'));    }
+
+    public function showFront($id)
+    {
+        $jobs = Job::findOrFail($id);
+
+        return view('frontOffice.pages.jobDetails', compact('jobs'));
+    }
+
+    public function storeFront(Request $request)
+    {
+        $data = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'salaryRange' => 'required',
+            'company' => 'required',
+            'address' => 'required',
+        ]);
+
+        $job = Job::create($data);
+
+        return redirect()->route('jobslist')->with('success', 'Job created successfully');
+        }
+    
+        public function goToCreateJob()
+        {
+            return view('frontOffice.pages.addJob');
+        }
+
 }

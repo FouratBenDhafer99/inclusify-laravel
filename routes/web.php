@@ -52,7 +52,15 @@ Route::group([], function () {
     //Route::resource('user', 'App\Http\Controllers\backoffice\UserController', ['except' => ['show']]);
     Route::get('friends', ['as' => 'friends', 'uses' => 'App\Http\Controllers\frontoffice\TestController@friends']);
     Route::get('newsfeed', ['as' => 'newsfeed', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@index']);
+	Route::get('jobslist', ['as' => 'jobslist', 'uses' => 'App\Http\Controllers\JobController@indexFront']);
+	Route::post('jobApplications','App\Http\Controllers\JobApplicationController@store')->name('job-applications.store');
+	Route::get('/jobs/{id}', 'App\Http\Controllers\JobController@showFront')->name('jobs.showFront');
+	Route::get('/createJob', 'App\Http\Controllers\JobController@goToCreateJob')->name('jobs.goToCreateJob');
+
+
 });
+
+
 
 Route::resource('jobs', JobController::class);
 Route::resource('job-applications', JobApplicationController::class);
