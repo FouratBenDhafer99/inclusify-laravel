@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+
 return new class extends Migration
 {
     /**
@@ -21,6 +22,9 @@ return new class extends Migration
             $table->string('salaryRange');
             $table->string('company');
             $table->string('address');
+            $table->unsignedBigInteger('created_by');
+            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
+
         });
     }
 

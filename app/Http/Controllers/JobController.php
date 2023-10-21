@@ -97,12 +97,12 @@ class JobController extends Controller
 
         $job = Job::create($data);
 
-        return redirect()->route('jobslist')->with('success', 'Job created successfully');
-        }
+        return redirect()->route('jobslist')->with('success', 'Job created successfully');}
     
-        public function goToCreateJob()
-        {
-            return view('frontOffice.pages.addJob');
-        }
+    
+    public function goToCreateJob()
+    {
+        return view('frontOffice.pages.addJob');
+    }
 
 }

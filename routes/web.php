@@ -84,6 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('jobApplications','App\Http\Controllers\JobApplicationController@store')->name('job-applications.store');
 	Route::get('/jobs/{id}', 'App\Http\Controllers\JobController@showFront')->name('jobs.showFront');
 	Route::get('/createJob', 'App\Http\Controllers\JobController@goToCreateJob')->name('jobs.goToCreateJob');
+	Route::post('saveJob', 'App\Http\Controllers\JobController@storeFront')->name('jobs.storeFront');
 
 
     Route::get('jobs', ['as' => 'jobs', 'uses' => 'App\Http\Controllers\frontoffice\TestController@jobs']);

@@ -3,7 +3,18 @@
 <div class="main-content" style="padding:16px;">
     <div class="content">
         <div class="container-fluid">
-        <form  action="{{ route('jobs.store') }}" method="POST">
+        <div class="row">
+                            <div class="col-lg-12 mb-3">
+                                <div
+                                    class="card p-md-5 p-4 bg-primary-gradiant rounded-3 shadow-xss bg-pattern border-0 overflow-hidden">
+                                    <div class="bg-pattern-div"></div>
+                                    <h2 class="display2-size display2-md-size fw-700 text-white mb-0 mt-0">
+                                       Add your job offer
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+        <form  action="{{ route('jobs.storeFront') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label class="mymodal" style="color: #808080;" for="title">Title</label>
