@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="card-body w-100 p-0 text-center">
                                     <h2 class="mt-2 mb-1">
-                                        <a href="/singleproduct"
+                                        <a href="{{route("product.show", $product->id)}}"
                                            class="text-black fw-700 font-xsss lh-26">{{$product->name}}</a>
                                     </h2>
                                     <h6 class="font-xsss fw-600 text-grey-500 ls-2">{{$product->price}}</h6>

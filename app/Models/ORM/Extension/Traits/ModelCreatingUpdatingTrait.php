@@ -15,7 +15,8 @@ trait ModelCreatingUpdatingTrait
         static::creating(function ($model) {
             if ($model instanceof BlamableAwareInterface) {
                 $user = auth()->user();
-                $model->created_by = $user->id;
+                $model->created_by = 2;
+                //$model->created_by = $user->id;
                 if ($model->offsetExists('updated_by'))
                     $model->updated_by = $user->id;
             }
