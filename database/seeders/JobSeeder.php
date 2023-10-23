@@ -22,7 +22,7 @@ class JobSeeder extends Seeder
             'salaryRange' => '$60,000 - $80,000',
             'company' => 'TechCo',
             'address' => '123 Main St',
-            'created_by' => 1,
+      
         ]);
     }
 }

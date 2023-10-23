@@ -42,7 +42,7 @@
                             </div>
                             
                             <!-- Add more form fields as needed -->
-                            <button type="submit" class="btn btn-primary">Add Job</button>
+                            <button type="submit" class="btn btn-primary rounded- fon-xss text-white">Add Job</button>
                         </form>
 
         </div>

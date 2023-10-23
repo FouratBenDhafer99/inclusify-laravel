@@ -41,66 +41,7 @@
                     </table>
                 </div>
             </div>
-            <!-- <div class="modal fade" id="delJobModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="padding: 20px; display: flex; justify-content: center;">
-                        <form style=" display: flex; justify-content: center; flex-direction:column" method="POST" action="{{ route('jobs.destroy', $job->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <p style="color: #808080;" >Are you sure you want to delete this job?</p>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        </form>
-                    </div>
-                </div>
-            </div> -->
-            <!-- Edit Modal -->
-            <!-- <div class="modal fade" id="editJobModal" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editJobModalLabel">Edit Job</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('jobs.update', $job->id) }}">
-                    @csrf
-                    @method('PUT')
-                    <div class="form-group">
-                        <label for="title">Title:</label>
-                        <input type="text" id="title" name="title" value="{{ $job->title }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea id="description" name="description">{{ $job->description }}</textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="salaryRange">Salary Range:</label>
-                        <input type="text" id="salaryRange" name="salaryRange" value="{{ $job->salaryRange }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company">Company:</label>
-                        <input type="text" id="company" name="company" value="{{ $job->company }}">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Address:</label>
-                        <input type="text" id="address" name="address" value="{{ $job->address }}">
-                    </div>
-
-                     
-
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
+            
             <div class="card-footer py-4">
                 <nav class="d-flex justify-content-end" aria-label="...">
 

@@ -85,6 +85,18 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/jobs/{id}', 'App\Http\Controllers\JobController@showFront')->name('jobs.showFront');
 	Route::get('/createJob', 'App\Http\Controllers\JobController@goToCreateJob')->name('jobs.goToCreateJob');
 	Route::post('saveJob', 'App\Http\Controllers\JobController@storeFront')->name('jobs.storeFront');
+	Route::get('/myOffers', 'App\Http\Controllers\JobController@jobsByConnectedUser')->name('jobs.jobsByConnectedUser');
+	Route::delete('jobs/{id}', 'App\Http\Controllers\JobController@destroyFront')->name('jobs.destroyFront');
+	Route::put('jobs/{id}', 'App\Http\Controllers\JobController@updateFront')->name('jobs.updateFront');
+	Route::get('jobApplicationslist/{jobId}',  'App\Http\Controllers\JobApplicationController@getApplicationsByJobId')->name('jobApplicationslist');
+	Route::put('jobApplications/{id}', 'App\Http\Controllers\JobApplicationController@updateStatus')->name('jobApplication.UpdateStatus');
+	route::get('myApplications', 'App\Http\Controllers\JobApplicationController@jobApplicationsByConnectedUser')->name('jobs.ApplicationByConnectedUser');
+	Route::delete('jobApplications/{id}', 'App\Http\Controllers\JobApplicationController@destroyFront')->name('jobApp.destroyFront');
+
+
+
+
+
 
 
     Route::get('jobs', ['as' => 'jobs', 'uses' => 'App\Http\Controllers\frontoffice\TestController@jobs']);

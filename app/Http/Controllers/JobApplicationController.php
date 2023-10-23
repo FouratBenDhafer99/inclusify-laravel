@@ -90,4 +90,51 @@ public function create(Request $request)
 
 }
 
+public function getApplicationsByJobId($jobId)
+{
+    $jobApplications = JobApplication::where('job_id', $jobId)->get();
+
+    return view('frontoffice.pages.job.jobApplications', compact('jobApplications'));
+
 }
+
+public function goToApplications(){
+    $jobApplications = JobApplication::all();
+
+    return view('frontoffice.job.jobApplications', compact('jobApplications'));
+}
+
+public function updateStatus(Request $request, $id)
+{
+    $data = $request->validate([
+        'status' => 'required|in:pending,accepted,rejected',
+    ]);
+
+    $jobApplication = JobApplication::findOrFail($id);
+    $jobApplication->update($data);
+
+    return redirect()->route('jobApplicationslist', $jobApplication->job_id)
+        ->with('success', 'Job application updated successfully.');}
+
+
+    public function jobApplicationsByConnectedUser()
+    {
+        $jobApplications = JobApplication::where('created_by', auth()->user()->id)->get();
+
+        return view('frontoffice.pages.job.myApplications', compact('jobApplications'));
+    }
+    public function destroyFront($id)
+    {
+        $jobApplication = JobApplication::find($id);
+
+        if (!$jobApplication) {
+            return redirect()->route('jobs.ApplicationByConnectedUser')->with('error', 'Job not found');
+        }
+
+        $jobApplication->delete();
+
+        return redirect()->route('jobs.ApplicationByConnectedUser')->with('success', 'Job deleted successfully');
+    }
+}
+
+

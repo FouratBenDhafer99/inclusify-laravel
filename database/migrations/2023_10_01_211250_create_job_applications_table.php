@@ -16,13 +16,13 @@ return new class extends Migration
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('job_id');
-            $table->foreignId('user_id');
+            $table->unsignedBigInteger('created_by');
             $table->timestamps();
             $table->string('resume_path'); 
             $table->text('motivation');
             $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
 
         });
     }

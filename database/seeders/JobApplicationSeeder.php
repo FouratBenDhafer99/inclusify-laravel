@@ -29,7 +29,7 @@ class JobApplicationSeeder extends Seeder
                 'resume_path' => 'uploads/resumes/resume.pdf',
                 'motivation' => $faker->paragraph,
                 'status' => $faker->randomElement(['pending', 'accepted', 'rejected']),
-                'user_id' => 1,
+                'created_by' => 1,
             ]);
         }
     }
