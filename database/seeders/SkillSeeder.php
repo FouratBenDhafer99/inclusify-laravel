@@ -16,22 +16,22 @@ class SkillSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('skills')->insert([[
-            'id' => 1,
-            'name' => 'JavaScript',
-            'created_at' => now(),
-            'updated_at' => now()
-        ],[
-            'id' => 2,
-            'name' => 'Java',
-            'created_at' => now(),
-            'updated_at' => now()
-        ],[
-            'id' => 3,
-            'name' => 'React',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]]);
-        //Skill::factory(5)->create();
+        // DB::table('skills')->insert([[
+        //     'id' => 1,
+        //     'name' => 'JavaScript',
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ],[
+        //     'id' => 2,
+        //     'name' => 'Java',
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ],[
+        //     'id' => 3,
+        //     'name' => 'React',
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]]);
+        Skill::factory(5)->create();
     }
 }

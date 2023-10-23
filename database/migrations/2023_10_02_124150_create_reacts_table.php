@@ -15,10 +15,15 @@ return new class extends Migration
     {
         Schema::create('reacts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->unsignedBigInteger('created_by');
             $table->enum('reactType', ['Like', 'Love', 'Haha', 'Wow', 'Sad', 'Angry']);
-            $table->foreignId('post_id')->constrained('posts');
+            $table->unsignedBigInteger('post_id');
             $table->timestamps();
+            $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('post_id')->references('id')->on('posts')->cascadeOnDelete();
+            
+            
+            
         });
     }
 

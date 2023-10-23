@@ -8,15 +8,15 @@ use App\Models\ORM\Extension\Traits\ModelCreatingUpdatingTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class React extends Model implements BlamableAwareInterface
+class Comment extends Model implements BlamableAwareInterface
 {
-    use HasFactory;
-    use BlamableTableTrait;
-    use ModelCreatingUpdatingTrait;
+  use HasFactory;
+  use BlamableTableTrait;
+  use ModelCreatingUpdatingTrait;
 
     protected $fillable = [
         'user_id',
-        'reactType',
+        'comment',
         'post_id',
     ];
 
@@ -27,6 +27,6 @@ class React extends Model implements BlamableAwareInterface
 
     public function post()
     {
-        return $this->belongsTo(Post::class, 'post_id');
+        return $this->belongsTo(Post::class , 'post_id');
     }
 }
