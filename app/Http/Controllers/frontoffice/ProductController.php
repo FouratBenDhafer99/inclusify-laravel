@@ -57,5 +57,31 @@ class ProductController extends Controller
         }
         return view('frontoffice.pages.market.product', compact('product'));
     }
+    
+    public function session($id)
+    {
+        $product = Product::find($id);
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+
+        $session = \Stripe\Checkout\Session::create([
+            'line_items'  => [
+                [
+                    'price_data' => [
+                        'currency'     => 'eur',
+                        'product_data' => [
+                            'name' => $product->name,
+                        ],
+                        'unit_amount'  => $product->quantity,
+                    ],
+                    'quantity'   =>  1,
+                ],
+            ],
+            'mode'        => 'payment',
+            'success_url' => route('product.list'),
+            'cancel_url'  => route('product.list'),
+        ]);
+
+        return redirect()->away($session->url);
+    }
 
 }

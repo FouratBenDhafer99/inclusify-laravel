@@ -98,6 +98,7 @@ Route::group(['prefix'=>'products', 'as'=>'product.', 'middleware' => 'auth'], f
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@productForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@addProduct']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@updateProduct']);
+    Route::post('checkout/{id}', ['as' => 'checkout', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@session']);
 });
 
 Route::group(['middleware' => 'auth'], function () {
