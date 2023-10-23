@@ -76,7 +76,6 @@ class JobController extends Controller
     {
         // $jobs = Job::all();
         $userConnected = auth()->user();
-
         $jobs = Job::where('created_by','!=', $userConnected->id)->get();
 
 

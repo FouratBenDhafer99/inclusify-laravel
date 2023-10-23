@@ -48,6 +48,18 @@
                                 <td>{{ $job->job->title }}</td>
                                 <td><Button  class="btn btn-sm btn-primari" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fas fa-trash fa-lg"></i></Button></td>
                             </tr>
+                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" style="padding: 20px; display: flex; justify-content: center;">
+                        <form style=" display: flex; justify-content: center; flex-direction:column" method="POST" action="{{ route('jobApp.destroyFront', $job->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <p style="color: #808080;" >Are you sure you want to delete this job?</p>
+                            <button type="submit" class="btn btn-sm btn-danger rounded-xl m-1 ">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
                             @endforeach
                           </tbody>
                     </table>
@@ -61,18 +73,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="padding: 20px; display: flex; justify-content: center;">
-                        <form style=" display: flex; justify-content: center; flex-direction:column" method="POST" action="{{ route('jobApp.destroyFront', $job->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <p style="color: #808080;" >Are you sure you want to delete this job?</p>
-                            <button type="submit" class="btn btn-sm btn-danger rounded-xl m-1 ">Delete</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+  
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -23,13 +23,7 @@
                             </div>   
                             </div> 
                             </div> 
-                        @endforeach                    
-                    </div>
-                </div>     
-            </div>    
-</div>
-<!-- delete Modal -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="padding: 20px; display: flex; justify-content: center;">
                         <form style=" display: flex; justify-content: center; flex-direction:column" method="POST"  action="{{ route('jobs.destroyFront', $value->id) }}">
@@ -42,9 +36,8 @@
                 </div>
             </div>
 
-               <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary-gradiant">
                 <h5 class="modal-title display2-size display2-md-size fw-700 text-white mb-0 mt-0" id="editJobModalLabel">Edit Job</h5>
@@ -88,7 +81,18 @@
             </div>
         </div>
     </div>
-</div>               
+</div>  
+
+                        @endforeach                    
+                    </div>
+                </div>     
+            </div>    
+</div>
+<!-- delete Modal -->
+            
+
+               <!-- Edit Modal -->
+              
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
