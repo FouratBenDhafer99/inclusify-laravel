@@ -5,7 +5,7 @@ namespace App\Http\Controllers\frontoffice;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Notifications\EventJoined;
-use App\Models\Categories;
+use App\Models\CategoryEvent;
 
 class EventController extends Controller
 {
@@ -28,7 +28,7 @@ class EventController extends Controller
             }
             arsort($categoryAttendanceCounts);
             $topCategory = key($categoryAttendanceCounts);
-            $topCategoryModel = Categories::where('name', $topCategory)->first();
+            $topCategoryModel = CategoryEvent::where('name', $topCategory)->first();
             if ($topCategoryModel) {
                 $topEvents = Event::where('category_id', $topCategoryModel->id)
                     ->withCount('attendees')

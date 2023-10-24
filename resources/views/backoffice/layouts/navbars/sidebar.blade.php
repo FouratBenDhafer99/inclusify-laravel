@@ -109,7 +109,7 @@
                 </div>
             </li>
             <li >
-                <a href="{{ route('events.index') }}">
+                <a href="{{ route('admin.events.list') }}">
                 <i class="fas fa-calendar-alt"></i> 
                 <p>{{ __('Events') }}</p>
                 </a>

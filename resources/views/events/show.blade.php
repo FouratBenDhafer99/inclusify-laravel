@@ -20,7 +20,7 @@
             <p>Category: {{ $event->category->name }}</p>
 
     
-            <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary">Edit</a>
+            <a href="{{ route('admin.events.edit', $event->id) }}" class="btn btn-primary">Edit</a>
         </div>
     </div>
 </div>

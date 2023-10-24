@@ -60,8 +60,8 @@
             <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
                 <input type="text" id="searchInput" class="form-control" placeholder="Search Events">
                 <div style="display: flex; gap: 10px;">
-                <button type="button" class="btn btn-primary remove-all-button" data-url="{{ route('events.deleteAll') }}" data-type="events">Remove All</button>
-                <a href="{{ route('events.create') }}" class="btn btn-success">Create New Event</a>
+                <button type="button" class="btn btn-primary remove-all-button" data-url="{{ route('admin.events.deleteAll') }}" data-type="events">Remove All</button>
+                <a href="{{ route('admin.events.create') }}" class="btn btn-success">Create New Event</a>
                 </div>
             </div>
 
@@ -77,7 +77,7 @@
             @if (count($data['events']) === 0)
                 <p>No events found.</p>
             @else
-            <form method="POST" action="{{ route('events.deleteAll') }}">
+            <form method="POST" action="{{ route('admin.events.deleteAll') }}">
                 @csrf
                 @method('DELETE') 
                 <table class="table">
@@ -103,13 +103,13 @@
                             <td>{{ $event->capacity }}</td>
                             <td>
                                 <div class="btn-group">
-                                    <a href="{{ route('events.show', $event->id) }}" class="btn btn-link">
+                                    <a href="{{ route('admin.events.show', $event->id) }}" class="btn btn-link">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <a href="{{ route('events.edit', $event->id) }}" class="btn btn-link">
+                                    <a href="{{ route('admin.events.edit', $event->id) }}" class="btn btn-link">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form method="POST" action="{{ route('events.destroy', $event->id) }}">
+                                    <form method="POST" action="{{ route('admin.events.destroy', $event->id) }}">
                                         @csrf
                                         @method('DELETE') 
                                         <button class="btn btn-link" type="submit" onclick="return confirm('Are you sure you want to delete this event?');">
@@ -141,7 +141,7 @@
                 <input type="text" id="searchCategoryInput" class="form-control" placeholder="Search Categorys">
                 <div style="display: flex; gap: 10px;">
                     <button type="button" class="btn btn-primary" id="removeAllCategoriesButton">Remove All</button>
-                    <a href="{{ route('categories.create') }}" class="btn btn-success">Create New Category</a>
+                    <a href="{{ route('admin.categoryevent.create') }}" class="btn btn-success">Create New Category</a>
                 </div>
             </div>
 
@@ -172,13 +172,13 @@
                             <td>{{ $category->name }}</td>
                             <td>
                             <div class="btn-group">
-                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-link">
+                                <a href="{{ route('admin.categoryevent.edit', $category->id) }}" class="btn btn-link">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form method="POST" action="{{ route('categories.destroy', $category->id) }}" id="deleteCategoryForm">
+                                <form method="POST" action="{{ route('admin.categoryevent.destroy', $category->id) }}" id="deleteCategoryForm">
                                     @csrf
                                     @method('DELETE') 
-                                    <button class="btn btn-link" type="submit" onclick="confirmDelete('{{ route('categories.deleteAll') }}', 'all')">
+                                    <button class="btn btn-link" type="submit" onclick="confirmDelete('{{ route('admin.categoryevent.deleteAll') }}', 'all')">
                                         <i class="fas fa-trash-alt"></i>
                                     </button>
                                 </form>

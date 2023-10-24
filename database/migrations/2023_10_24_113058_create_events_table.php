@@ -23,9 +23,9 @@ return new class extends Migration
             $table->integer('capacity');
             $table->dateTime('registration_deadline');
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_id')->default(1);
             $table->unsignedBigInteger('organizer_id'); // Corrected column name
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('category_events');
             $table->foreign('organizer_id')->references('id')->on('users'); // Corrected column name
 
             $table->timestamps();

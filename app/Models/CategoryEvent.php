@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Event;
 
-class Categories extends Model
+class CategoryEvent extends Model
 {
     public $timestamps = false;
 

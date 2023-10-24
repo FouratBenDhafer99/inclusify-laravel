@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Categories;
+use App\Models\CategoryEvent;
 use App\Models\User;
 
 class Event extends Model
@@ -32,7 +32,7 @@ class Event extends Model
 
     public function category()
     {
-        return $this->belongsTo(Categories::class, 'category_id');
+        return $this->belongsTo(CategoryEvent::class, 'category_id');
     }
 
     public function attendees()

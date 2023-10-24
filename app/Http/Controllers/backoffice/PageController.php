@@ -83,6 +83,6 @@ class PageController extends Controller
      */
     public function events()
     {
-        return view('backoffice.events.index');
+        return view('events.index');
     }
 }

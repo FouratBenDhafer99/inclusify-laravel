@@ -4,7 +4,7 @@ namespace App\Http\Controllers\events;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
-use App\Models\Categories;
+use App\Models\CategoryEvent;
 use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
@@ -16,7 +16,7 @@ class EventController extends Controller
 {
     public function index()
     {
-        $categories = Categories::all();
+        $categories = CategoryEvent::all();
         $events = Event::all();
         $data = [
             'categories' => $categories,
@@ -29,7 +29,7 @@ class EventController extends Controller
     public function create()
     {
         $users = User::all();
-        $categories = Categories::all();
+        $categories = CategoryEvent::all();
         return view('events.create', ['users' => $users, 'categories' => $categories]);
     }
 
@@ -45,7 +45,7 @@ class EventController extends Controller
 
             $event = Event::create($data);
 
-            return redirect()->route('events.index')
+            return redirect()->route('admin.events')
                 ->with('success', 'Event created successfully');
         } catch (\Exception $e) {
             dd($e);
@@ -62,7 +62,7 @@ class EventController extends Controller
     public function edit($id)
     {
         $users = User::all();
-        $categories = Categories::all();
+        $categories = CategoryEvent::all();
         $event = Event::findOrFail($id);
         return view('events.edit',  ['event'=>$event, 'users' => $users, 'categories' => $categories]);
     }
@@ -80,7 +80,7 @@ class EventController extends Controller
                 $event->image = $imagePath;
                 $event->save();
             }
-            return redirect()->route('events.index')
+            return redirect()->route('admin.events')
                 ->with('success', 'Event updated successfully.');
         } catch (\Exception $e) {
             return back()->with('error', 'An error occurred while updating the event.');
@@ -95,7 +95,7 @@ class EventController extends Controller
         $event = Event::findOrFail($id);
         $event->delete();
 
-        return redirect()->route('events.index')
+        return redirect()->route('admin.events')
             ->with('success', 'Event deleted successfully.');
     }
 
@@ -113,7 +113,7 @@ class EventController extends Controller
     {
         Event::query()->delete();
 
-        return redirect()->route('events.index')
+        return redirect()->route('admin.events')
             ->with('success', 'All events have been deleted.');
     }
     
