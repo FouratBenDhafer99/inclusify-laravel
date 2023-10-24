@@ -8,27 +8,23 @@ use App\Models\ORM\Extension\Traits\ModelCreatingUpdatingTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Quiz extends Model implements BlamableAwareInterface
+class Post extends Model implements BlamableAwareInterface
 {
+
     use HasFactory;
     use BlamableTableTrait;
     use ModelCreatingUpdatingTrait;
 
-
     protected $fillable = [
-        'score',
-        'isSuccessful',
-        'isFinished'
+        'description',
+        'images',
     ];
 
-    public function skill()
+    public function comments()
     {
-        return $this->belongsTo(Skill::class, 'skill_id');
+        return $this->hasMany(Comment::class);
     }
 
-    public function questions()
-    {
-        return $this->belongsToMany(Question::class);
-    }
+
 
 }

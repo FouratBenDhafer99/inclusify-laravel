@@ -19,6 +19,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/';
     public const NEWS = '/newsfeed';
+    public const ADMINHOME = '/admin/dashboard';
+    public const UNAUTHORIZED= "/unauthorized";
 
     /**
      * The controller namespace for the application.
