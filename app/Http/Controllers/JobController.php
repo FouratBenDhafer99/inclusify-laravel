@@ -41,11 +41,11 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|min:5',
+            'description' => 'required|max:200',
             'salaryRange' => 'required',
             'company' => 'required',
-            'address' => 'required',
+            'address' => 'required|min:5',
         ]);
 
         $job = Job::findOrFail($id);
@@ -93,11 +93,11 @@ class JobController extends Controller
     public function storeFront(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|min:5',
+            'description' => 'required|max:200',
             'salaryRange' => 'required',
             'company' => 'required',
-            'address' => 'required',
+            'address' => 'required|min:5',
         ]);
 
         $job = Job::create($data);

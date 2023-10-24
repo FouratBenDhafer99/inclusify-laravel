@@ -34,7 +34,8 @@
                         <tbody>
                         @foreach($jobApplications as $job)
                             <tr>
-                                <td>{{ $job->resume_path }}</td>
+                            <td><a href="{{ route('download.resume', ['filename' => basename($job->resume_path)]) }}" class="btn btn-primary">Download Resume</a></td>
+
                                 <td>{{ $job->motivation }}</td>
                                 <td><button class="btn btn-sm  @if ($job->status === 'pending')
                                                      bg-primary

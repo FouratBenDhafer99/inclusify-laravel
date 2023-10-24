@@ -161,6 +161,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('jobApplications/{id}', 'App\Http\Controllers\JobApplicationController@updateStatus')->name('jobApplication.UpdateStatus');
 	route::get('myApplications', 'App\Http\Controllers\JobApplicationController@jobApplicationsByConnectedUser')->name('jobs.ApplicationByConnectedUser');
 	Route::delete('jobApplications/{id}', 'App\Http\Controllers\JobApplicationController@destroyFront')->name('jobApp.destroyFront');
+    Route::get('/download/{filename}', 'App\Http\Controllers\JobApplicationController@downloadResume')->name('download.resume');
 
 
 
