@@ -26,7 +26,7 @@ class ProductController extends Controller
             'description'=>$request->description,
             'price'=>$request->price,
             'quantity'=>$request->quantity,
-            'image'=>$request->image,
+            'image'=>'https://img.buzzfeed.com/buzzfeed-static/static/2017-11/2/17/campaign_images/buzzfeed-prod-fastlane-01/i-tried-the-iphone-x-and-the-killer-feature-is-it-2-2546-1509659724-0_dblbig.jpg',
         ]);
         return back()->withStatus(__('Product successfully added.'));
     }

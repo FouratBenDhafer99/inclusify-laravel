@@ -59,6 +59,7 @@
                                                     <label class="mont-font fw-600 font-xssss">{{ __('Price') }}</label>
                                                     <input type="number" name="price" placeholder="{{ __('Price') }}"
                                                         min=0.01
+                                                        step="0.01"
                                                         class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }}"
                                                         value="{{ old('price', $product?->price) }}" />
                                                 </div>
