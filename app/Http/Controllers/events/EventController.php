@@ -33,10 +33,10 @@ class EventController extends Controller
         return view('events.create', ['users' => $users, 'categories' => $categories]);
     }
 
-    public function store(EventRequest $request) 
+    public function store(EventRequest $request)
     {
         try {
-            $data = $request->validated(); 
+            $data = $request->validated();
 
             if ($request->hasFile('image')) {
                 $imagePath = $request->file('image')->store('event_images', 'public');
@@ -45,7 +45,7 @@ class EventController extends Controller
 
             $event = Event::create($data);
 
-            return redirect()->route('admin.events')
+            return redirect()->route('admin.events.list')
                 ->with('success', 'Event created successfully');
         } catch (\Exception $e) {
             dd($e);
@@ -72,10 +72,10 @@ class EventController extends Controller
         try {
             $event = Event::findOrFail($id);
             $event->update($request->validated());
-    
+
             if ($request->hasFile('image')) {
                 $newImage = $request->file('image');
-    
+
                 $imagePath = $newImage->store('images', 'public');
                 $event->image = $imagePath;
                 $event->save();
@@ -86,8 +86,8 @@ class EventController extends Controller
             return back()->with('error', 'An error occurred while updating the event.');
         }
     }
-    
-    
+
+
 
 
     public function destroy($id)
@@ -104,11 +104,11 @@ class EventController extends Controller
     {
         $query = $request->input('search');
         $events = Event::where('name', 'like', '%' . $query . '%')->get();
-    
+
         return view('events.search_results', compact('events'));
     }
 
-    
+
     public function deleteAll()
     {
         Event::query()->delete();
@@ -116,8 +116,8 @@ class EventController extends Controller
         return redirect()->route('admin.events')
             ->with('success', 'All events have been deleted.');
     }
-    
-    
+
+
 
     public function generateGoogleMeetLink()
     {
@@ -140,9 +140,9 @@ class EventController extends Controller
             return response('Internal Server Error', 500);
         }
     }
-    
-    
-    
-    
+
+
+
+
 
 }

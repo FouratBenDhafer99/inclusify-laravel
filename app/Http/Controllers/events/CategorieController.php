@@ -25,7 +25,7 @@ class CategorieController extends Controller
             'name' => $request->input('name')
         ]);
 
-        return redirect()->route('admin.events')
+        return redirect()->route('admin.events.list')
             ->with('success', 'Category created successfully.');
     }
 
@@ -33,20 +33,20 @@ class CategorieController extends Controller
     {
         $query = $request->input('search');
         $categories = CategoryEvent::where('name', 'like', '%' . $query . '%')->get();
-    
+
         return view('categories.search_results', compact('categories'));
     }
 
     public function deleteAll(Request $request)
     {
         $selectedCategoryIds = $request->input('selectedCategories');
-    
+
         if (is_array($selectedCategoryIds) && count($selectedCategoryIds) > 0) {
             CategoryEvent::whereIn('id', $selectedCategoryIds)->delete();
         } else {
             return redirect()->route('admin.events')->with('error', 'No categories selected for deletion.');
         }
-    
+
         return redirect()->route('admin.events')->with('success', 'Category(s) deleted successfully.');
     }
 
@@ -61,14 +61,14 @@ class CategorieController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-    
+
         $category = CategoryEvent::findOrFail($id);
         $category->name = $request->input('name');
         $category->save();
-    
+
         return redirect()->route('admin.events', ['activeTab' => 'categoryTab'])->with('success', 'Category updated successfully.');
     }
-    
-    
+
+
 
 }

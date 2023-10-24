@@ -4,7 +4,7 @@
 <div class="container">
     <h1>Create New Category</h1>
 
-    <form method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('admin.categoryevent.categoryevent.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="form-group">

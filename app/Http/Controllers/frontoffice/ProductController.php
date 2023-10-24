@@ -15,7 +15,7 @@ class ProductController extends Controller
     {
         $product= Product::find($id);
         $categories = Category::all();
-        
+
         return view('frontoffice.pages.market.product_form',compact('product', 'categories'));
     }
     public function addProduct(ProductRequest $request)
@@ -57,7 +57,7 @@ class ProductController extends Controller
         }
         return view('frontoffice.pages.market.product', compact('product'));
     }
-    
+
     public function session($id)
     {
         $product = Product::find($id);
