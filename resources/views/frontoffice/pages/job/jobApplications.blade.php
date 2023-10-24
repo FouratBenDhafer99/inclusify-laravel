@@ -46,20 +46,7 @@
                                 <td>{{ $job->user->name }}</td>
                                 <td>{{ $job->job->title }}</td>
                             </tr>
-                            @endforeach
-                          </tbody>
-                    </table>
-                </div>
-            </div>
-            
-            <div class="card-footer py-4">
-                <nav class="d-flex justify-content-end" aria-label="...">
-
-                </nav>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="padding: 20px; display: flex; justify-content: center;">
                         <form style=" display: flex; justify-content: center; flex-direction:column" method="POST"  action="{{route('jobApplication.UpdateStatus',['id' => $job->id])}}">
@@ -89,6 +76,20 @@
                     </div>
                 </div>
             </div>
+                            @endforeach
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card-footer py-4">
+                <nav class="d-flex justify-content-end" aria-label="...">
+
+                </nav>
+            </div>
+        </div>
+    </div>
+   
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Notifications\ApplyNotification;
+
 
 use App\Models\JobApplication;
 class JobApplicationController extends Controller
@@ -86,6 +88,9 @@ public function create(Request $request)
        
     ]);
 
+    auth()->user()->notify(new ApplyNotification($jobApplication));
+
+    
     
 
 }
@@ -136,5 +141,3 @@ public function updateStatus(Request $request, $id)
         return redirect()->route('jobs.ApplicationByConnectedUser')->with('success', 'Job deleted successfully');
     }
 }
-
-

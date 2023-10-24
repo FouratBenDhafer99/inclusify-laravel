@@ -8,19 +8,37 @@
 
 <div class="main-content" style="padding:16px;">
     <div class="content">
-        <div class="container-fluid">
+    <div class="container-fluid">
+    <div class="card border-0 mb-3 shadow-xss bg-white rounded-3 p-4">
+        <div class="font-weight-bold font-xss mb-2">Job Title:</div>
+        <h4 class="font-xl">{{ $jobs->title }}</h4>
 
-        <div class="font-xss">Job Title : {{ $jobs->title}}</div>
-        <div>Job Description : {{ $jobs->description}}</div>
-        <div>Job Salary Range : {{ $jobs->salaryRange}}</div>
-        <div>Job Company : {{ $jobs->company}}</div>
-        <div>Job Address : {{ $jobs->address}}</div>
-        <div>Job Created at : {{ $jobs->created_at}}</div>
+        <div class="font-weight-bold font-xss mt-4 mb-2">Job Description:</div>
+        <p class="font-md">{{ $jobs->description }}</p>
 
-        </div>
+        <div class="font-weight-bold font-xss mt-4 mb-2">Job Salary:</div>
+        <p class="font-md">{{ $jobs->salaryRange }}</p>
+
+        <div class="font-weight-bold font-xss mt-4 mb-2">Job Company:</div>
+        <p class="font-md">{{ $jobs->company }}</p>
+
+        <div class="font-weight-bold font-xss mt-4 mb-2">Job Address:</div>
+        <p class="font-md">{{ $jobs->address }}</p>
+
+        <div class="font-weight-bold font-xss mt-4 mb-2">Job Created At:</div>
+        <p class="font-md">{{ $jobs->created_at }}</p>
+    </div>
+</div>
             
 
-        <h3 class="font-xss fw-900 text-gray-500 p-4">Apply</h3>
+        <<div
+                                    class="card p-md-5 p-4 bg-primary-gradiant rounded-3 shadow-xss bg-pattern border-0 overflow-hidden mb-2">
+                                    <div class="bg-pattern-div"></div>
+                                    <h2 class="display2-size display2-md-size fw-700 text-white mb-0 mt-0">
+                                       Apply for this job
+                                    </h2>
+                                </div>
+                            </div>
         <!-- Add the job application form here -->
         <form style="width:50%" action="{{ route('job-applications.store', ['job_id' => $jobs->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -39,7 +57,7 @@
                 <textarea class="form-control" id="motivation" name="motivation" required></textarea>
             </div>
             <!-- Add more form fields as needed -->
-            <button type="submit" class="btn btn-primary">Submit Application</button>
+            <button type="submit" class="btn btn-primary font-xss text-white rounded-xl ">Submit Application</button>
         </form>
     </div>
 </div>

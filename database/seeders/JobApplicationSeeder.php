@@ -25,7 +25,7 @@ class JobApplicationSeeder extends Seeder
 
         for ($i = 0; $i < $numberOfApplications; $i++) {
             JobApplication::create([
-                'job_id' => 2, 
+                'job_id' => 1, 
                 'resume_path' => 'uploads/resumes/resume.pdf',
                 'motivation' => $faker->paragraph,
                 'status' => $faker->randomElement(['pending', 'accepted', 'rejected']),

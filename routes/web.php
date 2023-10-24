@@ -43,8 +43,8 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'], function () {
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'App\Http\Controllers\backoffice\PageController@upgrade']);
 		Route::get('jobs', ['as' => 'jobs.list', 'uses' => 'App\Http\Controllers\JobController@index']);
 		Route::post('jobs', ['as' => 'jobs.store', 'uses' => 'App\Http\Controllers\JobController@store']);
-		Route::delete('jobs/{id}', 'App\Http\Controllers\JobController@destroy')->name('jobs.destroy');
-		Route::put('jobs/{id}', 'App\Http\Controllers\JobController@update')->name('jobs.update');
+		Route::delete('jobs/{id}', 'App\Http\Controllers\JobController@destroy')->name('jobs.Admindestroy');
+		Route::put('jobs/{id}', 'App\Http\Controllers\JobController@update')->name('jobs.Adminupdate');
 		Route::get('jobApplications', ['as' => 'jobs.jobAppList', 'uses' => 'App\Http\Controllers\JobApplicationController@index']);
 });
 

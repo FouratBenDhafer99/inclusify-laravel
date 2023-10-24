@@ -2,6 +2,11 @@
 @section('content')
 
 <div class="row">
+@if(session('success'))
+                <div id="myAlert" class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="col-md-12">
                 <div class="card ">
                 <div class="card-header">
@@ -46,9 +51,9 @@
                                                     @endif text-white font-xss rounded-xl">{{ $job->status }}</button></td>
                                 
                                 <td>{{ $job->job->title }}</td>
-                                <td><Button  class="btn btn-sm btn-primari" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fas fa-trash fa-lg"></i></Button></td>
+                                <td><Button  class="btn btn-sm btn-primari" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $job['id'] }}"><i class="fas fa-trash fa-lg"></i></Button></td>
                             </tr>
-                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal_{{ $job['id'] }}" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="padding: 20px; display: flex; justify-content: center;">
                         <form style=" display: flex; justify-content: center; flex-direction:column" method="POST" action="{{ route('jobApp.destroyFront', $job->id) }}">
@@ -78,6 +83,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#myAlert").fadeIn();
+
+        setTimeout(function() {
+            $("#myAlert").fadeOut();
+        }, 3000);
+    });
+</script>
 
 
     @endsection
