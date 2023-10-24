@@ -43,8 +43,8 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'], function () {
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'App\Http\Controllers\backoffice\PageController@upgrade']);
 		Route::get('jobs', ['as' => 'jobs.list', 'uses' => 'App\Http\Controllers\JobController@index']);
 		Route::post('jobs', ['as' => 'jobs.store', 'uses' => 'App\Http\Controllers\JobController@store']);
-		Route::delete('jobs/{id}', 'JobController@destroy')->name('jobs.destroy');
-		Route::put('jobs/{id}', 'JobController@update')->name('jobs.update');
+		Route::delete('jobs/{id}', 'App\Http\Controllers\JobController@destroy')->name('jobs.destroy');
+		Route::put('jobs/{id}', 'App\Http\Controllers\JobController@update')->name('jobs.update');
 		Route::get('jobApplications', ['as' => 'jobs.jobAppList', 'uses' => 'App\Http\Controllers\JobApplicationController@index']);
 });
 
@@ -90,20 +90,21 @@ Route::group(['prefix' => 'admin/events', 'as' => 'admin.events.', 'middleware' 
     Route::post('events/{event}', [EventController::class, 'destroy'])->name('destroy');
     Route::get('/create', [EventController::class, 'create'])->name('create');
     Route::post('events', [EventController::class, 'store'])->name('store');
-    Route::post('show', [EventController::class, 'show'])->name('show');
-    Route::post('edit', [EventController::class, 'edit'])->name('edit');
+    Route::get('show/{id}', [EventController::class, 'show'])->name('show');
+    Route::get('edit/{id}', [EventController::class, 'edit'])->name('edit');
+    Route::put('update/{id}', [EventController::class, 'update'])->name('update');
     Route::delete('events/deleteAll', [EventController::class, 'deleteAll'])->name('deleteAll');
     Route::get('events/search', [EventController::class, 'search'])->name('search');
 });
 
 Route::group(['prefix' => 'admin/categoryevent', 'as' => 'admin.categoryevent.', 'middleware' => 'admin'], function () {
-    Route::resource('categoryevent', CategoryEventController::class);
-    Route::post('categoryevent/{categoryevent}', [CategoryEventController::class, 'destroy'])->name('destroy');
-    Route::get('categoryevent/create', [CategoryEventController::class, 'create'])->name('create');
-    Route::post('categoryevent', [CategoryEventController::class, 'store'])->name('store');
-    Route::post('categoryevent', [CategoryEventController::class, 'edit'])->name('edit');
-    Route::post('deleteAll', [App\Http\Controllers\events\CategoryEventController::class, 'deleteAll'])->name('deleteAll');
-    Route::get('search', [CategoryEventController::class, 'search'])->name('search');
+    Route::resource('categoryevent', CategorieController::class);
+    Route::post('categoryevent/{categoryevent}', [CategorieController::class, 'destroy'])->name('destroy');
+    Route::get('categoryevent/create', [CategorieController::class, 'create'])->name('create');
+    Route::post('categoryevent', [CategorieController::class, 'store'])->name('store');
+    Route::post('', [CategorieController::class, 'edit'])->name('edit');
+    Route::post('deleteAll', [CategorieController::class, 'deleteAll'])->name('deleteAll');
+    Route::get('search', [CategorieController::class, 'search'])->name('search');
 });
 
 
@@ -189,14 +190,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 Route::middleware(['web'])->group(function () {
     /*Route::resource('/admin/events', EventController::class);
-    
+
     Route::post('/admin/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     Route::get('/admin/events/create', [EventController::class, 'create'])->name('events.create');
     Route::post('/admin/events', [EventController::class, 'store'])->name('events.store');
     Route::delete('/admin/events/deleteAll',[EventController::class, 'deleteAll'])->name('events.deleteAll');
     Route::get('/admin/events/search', [EventController::class, 'search'])->name('events.search');
     Route::get('/get-google-meet-link', [EventController::class, 'generateGoogleMeetLink'])->name('events.generateGoogleMeetLink');
-    
+
     Route::resource('/admin/category', CategorieController::class);
 
     Route::post('/admin/category/{event}', [CategorieController::class, 'destroy'])->name('categories.destroy');
