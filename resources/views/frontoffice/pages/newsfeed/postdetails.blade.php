@@ -10,7 +10,7 @@
                     </div>
 {{--                    <div class="h200 overflow-scroll ">--}}
                         @foreach($post->comments as $comment)
-                            <div class=" card w-75 bg-grey border-0 shadow-none right-scroll-bar pt-4 pb-4">
+                            <div class=" card w-50 bg-grey border-0 shadow-none right-scroll-bar pt-4 pb-4 m-4 me-4 col-xl-8 col-xxl-9 col-lg-8">
                                 <div class="card-body  p-0 d-flex h-75">
                                     <figure class="avatar me-3">
                                         <img
@@ -30,7 +30,6 @@
                                 </div>
                             </div>
                         @endforeach
-{{--                    </div>--}}
                     <form method="post" action="{{route("newsfeed.addComment",$post->id)}}">
                         @csrf
                         @method("post")

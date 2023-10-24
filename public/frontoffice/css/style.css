@@ -93,6 +93,17 @@
   border-radius: 5px;
 }
 
+.image-container {
+  max-height: 200px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: auto;
+}
+
+
 @keyframes gradient {
   100% {
     transform: translateX(100%) rotate(0deg);

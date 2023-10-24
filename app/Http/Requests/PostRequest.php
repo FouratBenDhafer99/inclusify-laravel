@@ -11,6 +11,7 @@ class PostRequest extends FormRequest
     {
         return [
             'description' => ['required', 'max:255'],
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation rules as needed
         ];
     }
 }

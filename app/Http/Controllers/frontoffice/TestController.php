@@ -61,6 +61,10 @@ class TestController extends Controller
     {
         $events = [
             (object)["id" => 1, "image" => 'product.png', "name" => 'The party', 'location'=>'Tunis, Tunisia','date' => '31', 'month' => 'APR',],
+            (object)["id" => 2, "image" => 'product.png', "name" => 'The party', 'location'=>'Tunis, Tunisia','date' => '31', 'month' => 'APR',],
+            (object)["id" => 3, "image" => 'product.png', "name" => 'The party', 'location'=>'Tunis, Tunisia','date' => '31', 'month' => 'APR',],
+            (object)["id" => 4, "image" => 'product.png', "name" => 'The party', 'location'=>'Tunis, Tunisia','date' => '31', 'month' => 'APR',],
+            (object)["id" => 5, "image" => 'product.png', "name" => 'The party', 'location'=>'Tunis, Tunisia','date' => '31', 'month' => 'APR',],
         ];
         return view('frontoffice.pages.base.events', compact('events'));
     }

@@ -55,4 +55,27 @@
 @endauth
 
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the link and file input elements
+        const imageLink = document.getElementById("imageLink");
+        const imageInput = document.getElementById("imageInput");
+
+        // Add a click event listener to the link
+        imageLink.addEventListener("click", function (e) {
+            e.preventDefault(); // Prevent the link from navigating
+
+            // Trigger a click event on the hidden file input
+            imageInput.click();
+        });
+
+        // Listen for changes in the file input (when files are selected)
+        imageInput.addEventListener("change", function () {
+            // Display the selected file names or any other desired behavior
+            const selectedFiles = Array.from(imageInput.files).map(file => file.name);
+            // You can update the link text or display the selected file names as needed
+            imageLink.innerText = selectedFiles.join(", ");
+        });
+    });
+</script>
 </html>
