@@ -1,7 +1,7 @@
 <div class="nav-header bg-white shadow-xs border-0">
     <div class="nav-top">
         <a href="{{url("/newsfeed")}}"><i class="feather-zap text-success display2-size me-3 ms-0"></i><span
-                class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">Sociala. </span>
+                class="d-inline-block fredoka-font ls-3 fw-600 text-current font-xxl logo-text mb-0">Inclusify. </span>
         </a>
         <a to="/defaultmessage" class="mob-menu ms-auto me-2 chat-active-btn"><i
                 class="feather-message-circle text-grey-900 font-sm btn-round-md bg-greylight"></i></a>

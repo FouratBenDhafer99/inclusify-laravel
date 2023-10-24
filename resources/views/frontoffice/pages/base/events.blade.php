@@ -14,7 +14,7 @@
                             </div>
                         </form>
                         <a href="/" class="btn-round-md ms-2 bg-greylight theme-dark-bg rounded-3"><i class="feather-filter font-xss text-grey-500"></i></a>
-                       
+
                     </h2>
                 </div>
 
@@ -25,7 +25,7 @@
                         <div class="card p-3 bg-white w-100 hover-card border-0 shadow-xss rounded-xxl border-0 mb-3 overflow-hidden">
                         <div class="card-image w-100">
                             <div class="image-container">
-                                <img src="{{ asset('storage/' . $event->image) }}" alt="{{ $event->name }}">
+                                <img src="{{ asset("/"). $event->image }}" alt="{{ $event->name }}">
                             </div>
                         </div>
                         <div class="card-body d-flex ps-0 pe-0 pb-0">
@@ -126,7 +126,7 @@
                     <!-- $recommandEvents is null -->
                 @endif
 
-                
+
 
             </div>
         </div>

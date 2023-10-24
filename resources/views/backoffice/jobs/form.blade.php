@@ -50,7 +50,7 @@
                         <label style="color: #808080;" for="address">Address</label>
                         <input style="color: #808080;" class="form-control" id="address" name="address" required></input>
                     </div>
-                    
+
                     <!-- Add more form fields as needed -->
                     <button type="submit" class="btn btn-primary">Add Job</button>
                 </form>

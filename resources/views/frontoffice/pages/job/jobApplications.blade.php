@@ -17,7 +17,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
             <div class="card-body">
 
                 <div class="">
@@ -34,7 +34,7 @@
                         <tbody>
                         @foreach($jobApplications as $job)
                             <tr>
-                                <td>{{ $job->resume_path }}</td>
+                                <td><a href="{{ storage_path($job->resume_path) }}" download="true">CV</a></td>
                                 <td>{{ $job->motivation }}</td>
                                 <td><button class="btn btn-sm  @if ($job->status === 'pending')
                                                      bg-primary
@@ -81,7 +81,7 @@
                     </table>
                 </div>
             </div>
-            
+
             <div class="card-footer py-4">
                 <nav class="d-flex justify-content-end" aria-label="...">
 
@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-   
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

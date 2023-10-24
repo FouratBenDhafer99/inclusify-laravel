@@ -2,10 +2,28 @@
 @section('page_title', $quiz->skill->name.' Quiz')
 @section('content')
     <script>
-        console.log(performance.getEntriesByType("navigation")[0])
-        if (performance.getEntriesByType("navigation")[0].type === 'reload') {
-            //window.location.href = { route('skill.start_quiz',$quiz->skill->id) }};
+        console.log("Bruh")
+        function countdown() {
+            var seconds = 15;
+            function tick() {
+                seconds--;
+                console.log(document.getElementById("timer"))
+                document.getElementById("counter").innerHTML="0:"// + (seconds < 10 ? "0" : "") + seconds;
+                //counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+                console.log(seconds)
+                if (seconds > 0) {
+                    console.log(seconds)
+                    setTimeout(tick, 1000);
+                    console.log(seconds)
+                } else {
+                    alert("Time is up");
+                    document.getElementById('submitBtn').click();
+                }
+            }
+            tick();
         }
+        countdown();
+
     </script>
     <div class="">
         <div class="middle-sidebar-bottom">
@@ -20,6 +38,9 @@
                                     <h2 class="display2-size display2-md-size fw-700 text-white mb-0 mt-0">
                                         {{$quiz->skill->name}} Quiz
                                     </h2>
+                                    <div class="ms-auto card timer" disabled id="timer">
+                                        <div id="counter"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +67,7 @@
                                 </div>
                             @endforeach
                             <div class="card shadow-none border-0">
-                                <button
+                                <button id="submitBtn"
                                     class="w-100 p-3 mt-3 font-xsss text-center text-white bg-current rounded-3 text-uppercase fw-600 ls-3 border-0">
                                     Submit
                                 </button>

@@ -11,11 +11,11 @@ class JobController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|min:5',
+            'description' => 'required|max:200',
             'salaryRange' => 'required',
             'company' => 'required',
-            'address' => 'required',
+            'address' => 'required|min:5',
         ]);
 
         $job = Job::create($data);
@@ -41,16 +41,16 @@ class JobController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|min:5',
+            'description' => 'required|max:200',
             'salaryRange' => 'required',
             'company' => 'required',
-            'address' => 'required',
+            'address' => 'required|min:5',
         ]);
 
         $job = Job::findOrFail($id);
         $job->update($data);
-        
+
         return redirect()->route('jobs.list', $job->id)->with('success', 'Job updated successfully');
         //return redirect()->route('jobs.list')->with('success', 'Job updated successfully');
 
@@ -72,7 +72,7 @@ class JobController extends Controller
         return redirect()->route('jobs.list')->with('success', 'Job deleted successfully');
     }
 
-    ///front office 
+    ///front office
 
     public function indexFront()
     {
@@ -93,18 +93,18 @@ class JobController extends Controller
     public function storeFront(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|min:5',
+            'description' => 'required|max:200',
             'salaryRange' => 'required',
             'company' => 'required',
-            'address' => 'required',
+            'address' => 'required|min:5',
         ]);
 
         $job = Job::create($data);
 
         return redirect()->route('jobslist')->with('success', 'Job created successfully');}
-    
-    
+
+
     public function goToCreateJob()
     {
         return view('frontOffice.pages.job.addJob');
@@ -118,7 +118,7 @@ class JobController extends Controller
 
         return view('frontOffice.pages.job.myOffers', compact('jobs'));
 
-        
+
     }
     public function destroyFront($id)
     {
@@ -135,11 +135,11 @@ class JobController extends Controller
         public function updateFront(Request $request, $id)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|min:5',
+            'description' => 'required|max:200',
             'salaryRange' => 'required',
             'company' => 'required',
-            'address' => 'required',
+            'address' => 'required|min:5',
         ]);
 
         $job = Job::findOrFail($id);
