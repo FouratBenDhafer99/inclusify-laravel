@@ -6,13 +6,14 @@ use \App\Http\Controllers\Controller;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use Illuminate\Support\Facades\Redirect;
 
 class NewsfeedController extends Controller
 {
     public function index()
     {
         $posts = Post::orderByDesc("updated_at")->get();
-//        dd($posts);
+
         $singlePostDetail = false;
         return view('frontoffice.pages.newsfeed.newsfeed', ['posts'=>$posts, 'singlePostDetail'=> $singlePostDetail]);
     }
@@ -51,6 +52,18 @@ class NewsfeedController extends Controller
         ]);
 
         return redirect()->route('newsfeed.detail', $postId);
+    }
+
+    public function deletePost($postId)
+    {
+        $post = Post::findOrFail($postId);
+
+        // Delete related comments or perform any other cleanup as needed
+        $post->comments()->delete();
+
+        $post->delete();
+
+        return redirect()->route('newsfeed');
     }
 
 

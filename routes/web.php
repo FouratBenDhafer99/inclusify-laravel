@@ -105,11 +105,7 @@ Route::group(['prefix'=>'newsfeed', 'as'=>'newsfeed.', 'middleware' => 'auth'], 
     Route::get('/{id}', ['as' => 'detail', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@postdetails']);
     Route::post('/addComment/{id}', ['as' => 'addComment', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@addComment']);
     Route::put('/update/{id}', ['as' => 'updatePost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@updatePost']);
-//    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@listSkills']);
-//    Route::get('start/{skillId}', ['as' => 'start_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@startQuiz']);
-//    Route::get('play/{skillId}', ['as' => 'play_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@playQuiz']);
-//    Route::put('submit/{quizId}', ['as' => 'submit_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@submitQuiz']);
-//    Route::get('result/{quizId}', ['as' => 'result_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@resultQuiz']);
+    Route::delete('/{id}', ['as' => 'deletePost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@deletePost']);
 });
 
 
@@ -120,6 +116,7 @@ Route::group(['prefix'=>'products', 'as'=>'product.', 'middleware' => 'auth'], f
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@addProduct']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@updateProduct']);
     Route::post('checkout/{id}', ['as' => 'checkout', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@session']);
+
 });
 
 Route::group(['middleware' => 'auth'], function () {

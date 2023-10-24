@@ -4,11 +4,19 @@
                                          class="shadow-sm rounded-circle w45"/></figure>
         <h4 class="fw-700 text-grey-900 font-xssss mt-1"> {{$post->createdBy->name}} <span
                 class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"> {{$post->created_at}}</span></h4>
-        @if ($singlePostDetail)
+        @if ($singlePostDetail && auth()->user()->id == $post->created_by)
             <div class="ms-auto pointer">
-                <i class="ti-trash text-grey-900 btn-round-md bg-red-gradiant font-xss me-2"></i>
+                <form method="post" action="{{ route('newsfeed.deletePost', ['id' => $post->id]) }}">
+                    @csrf
+                    @method("delete")
+                    <button type="submit" class="btn">
+                    <i class="ti-trash text-grey-900 btn-round-md bg-red-gradiant font-xss"></i>
+                    </button>
+                </form>
             </div>
         @endif
+
+
     </div>
     <div class="card-body p-0 me-lg-5">
         <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2">{{$post->description}}
@@ -23,8 +31,7 @@
         <div class="row ps-2 pe-2">
         </div>
     </div>
-    @if ($singlePostDetail)
-    <!-- Update Form -->
+    @if ($singlePostDetail && auth()->user()->id == $post->created_by)
         <form method="post" action="{{ route('newsfeed.updatePost', ['id' => $post->id]) }}">
             @csrf
             @method('PUT')
