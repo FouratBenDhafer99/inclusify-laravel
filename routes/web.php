@@ -2,9 +2,13 @@
 
 use App\Models\Skill;
 use App\Models\Question;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\events\EventController;
 use App\Http\Controllers\events\CategorieController;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobApplicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +41,11 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'], function () {
 		Route::get('tables', ['as' => 'pages.tables', 'uses' => 'App\Http\Controllers\backoffice\PageController@tables']);
 		Route::get('typography', ['as' => 'pages.typography', 'uses' => 'App\Http\Controllers\backoffice\PageController@typography']);
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'App\Http\Controllers\backoffice\PageController@upgrade']);
+		Route::get('jobs', ['as' => 'jobs.list', 'uses' => 'App\Http\Controllers\JobController@index']);
+		Route::post('jobs', ['as' => 'jobs.store', 'uses' => 'App\Http\Controllers\JobController@store']);
+		Route::delete('jobs/{id}', 'JobController@destroy')->name('jobs.destroy');
+		Route::put('jobs/{id}', 'JobController@update')->name('jobs.update');
+		Route::get('jobApplications', ['as' => 'jobs.jobAppList', 'uses' => 'App\Http\Controllers\JobApplicationController@index']);
 });
 
 Route::group(['prefix'=>'admin/profile', 'middleware' => 'auth'], function () {
@@ -47,13 +56,27 @@ Route::group(['prefix'=>'admin/profile', 'middleware' => 'auth'], function () {
 });
 
 Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'auth'], function () {
-    //Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
     Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\SkillController@addSkill']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\SkillController@deleteSkill']);
 });
+
+Route::group(['prefix'=>'admin/categories', 'as'=>'admin.category.', 'middleware' => 'auth'], function () {
+    Route::view('', 'backoffice.pages.categories.category_list', ['categories' => Category::all()])->name('list');
+    Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@categoryForm']);
+    Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@addCategory']);
+    Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@updateCategory']);
+    Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@deleteCategory']);
+});
+
+Route::group(['prefix'=>'admin/products', 'as'=>'admin.product.', 'middleware' => 'auth'], function () {
+    Route::view('', 'backoffice.pages.products.product_list', ['products' => Product::all()])->name('list');
+    Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\ProductController@deleteProduct']);
+});
+
 
 Route::group(['prefix'=>'admin/questions', 'as'=>'admin.question.', 'middleware' => 'auth'], function () {
     Route::view('', 'backoffice.pages.questions.question_list', ['questions' => Question::with('skill')->get()])->name('list');
@@ -72,9 +95,38 @@ Route::group(['prefix'=>'skills', 'as'=>'skill.', 'middleware' => 'auth'], funct
     Route::get('result/{quizId}', ['as' => 'result_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@resultQuiz']);
 });
 
+Route::group(['prefix'=>'products', 'as'=>'product.', 'middleware' => 'auth'], function () {
+    Route::view('', 'frontoffice.pages.market.shop',['productList' => Product::all(), 'categoryList' => Category::all() ])->name('list');
+    Route::get('product/{id}', 'App\Http\Controllers\frontoffice\ProductController@show')->name('show');
+    Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@productForm']);
+    Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@addProduct']);
+    Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@updateProduct']);
+    Route::post('checkout/{id}', ['as' => 'checkout', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@session']);
+});
+
 Route::group(['middleware' => 'auth'], function () {
     //Route::resource('user', 'App\Http\Controllers\backoffice\UserController', ['except' => ['show']]);
     Route::get('friends', ['as' => 'friends', 'uses' => 'App\Http\Controllers\frontoffice\TestController@friends']);
+    Route::get('newsfeed', ['as' => 'newsfeed', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@index']);
+	Route::get('jobslist', ['as' => 'jobslist', 'uses' => 'App\Http\Controllers\JobController@indexFront']);
+	Route::post('jobApplications','App\Http\Controllers\JobApplicationController@store')->name('job-applications.store');
+	Route::get('/jobs/{id}', 'App\Http\Controllers\JobController@showFront')->name('jobs.showFront');
+	Route::get('/createJob', 'App\Http\Controllers\JobController@goToCreateJob')->name('jobs.goToCreateJob');
+	Route::post('saveJob', 'App\Http\Controllers\JobController@storeFront')->name('jobs.storeFront');
+	Route::get('/myOffers', 'App\Http\Controllers\JobController@jobsByConnectedUser')->name('jobs.jobsByConnectedUser');
+	Route::delete('jobs/{id}', 'App\Http\Controllers\JobController@destroyFront')->name('jobs.destroyFront');
+	Route::put('jobs/{id}', 'App\Http\Controllers\JobController@updateFront')->name('jobs.updateFront');
+	Route::get('jobApplicationslist/{jobId}',  'App\Http\Controllers\JobApplicationController@getApplicationsByJobId')->name('jobApplicationslist');
+	Route::put('jobApplications/{id}', 'App\Http\Controllers\JobApplicationController@updateStatus')->name('jobApplication.UpdateStatus');
+	route::get('myApplications', 'App\Http\Controllers\JobApplicationController@jobApplicationsByConnectedUser')->name('jobs.ApplicationByConnectedUser');
+	Route::delete('jobApplications/{id}', 'App\Http\Controllers\JobApplicationController@destroyFront')->name('jobApp.destroyFront');
+
+
+
+
+
+
+
     Route::get('jobs', ['as' => 'jobs', 'uses' => 'App\Http\Controllers\frontoffice\TestController@jobs']);
     Route::get('newsfeed', ['as' => 'newsfeed', 'uses' => 'App\Http\Controllers\frontoffice\TestController@newsfeed']);
     Route::get('shop', ['as' => 'shop', 'uses' => 'App\Http\Controllers\frontoffice\TestController@shop']);
@@ -116,3 +168,8 @@ Route::group(['prefix' => 'events', 'as' => 'event.', 'middleware' => 'auth'], f
 
 
 /////////////////////////******************End E V E N T S********************////////////////////////////////////////
+
+Route::resource('jobs', JobController::class);
+Route::resource('job-applications', JobApplicationController::class);
+
+

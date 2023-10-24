@@ -32,6 +32,18 @@
                                 <p>{{ __('User Management') }}</p>
                             </a>
                         </li>
+                        <li >
+                            <a href="{{ route('jobs.list')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ __('Job Management') }}</p>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="{{ route('jobs.jobAppList')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ __('Job Applications Management') }}</p>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
@@ -60,6 +72,30 @@
                             <a>
                                 <i class="tim-icons icon-puzzle-10"></i>
                                 <p>{{ __('Quizzes') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <a data-toggle="collapse" href="#products-categories" aria-expanded="true">
+                    <i class="tim-icons icon-cart" ></i>
+                    <span class="nav-link-text" >{{ __('Products & Categories') }}</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse dropdown" id="products-categories">
+                    <ul class="nav pl-4">
+                        <li>
+                            <a href="{{ route('admin.product.list')  }}">
+                                <i class="tim-icons icon-basket-simple"></i>
+                                <p>{{ __('Products') }}</p>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="{{ route('admin.category.list')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ __('Categories') }}</p>
                             </a>
                         </li>
                     </ul>
