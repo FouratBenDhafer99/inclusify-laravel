@@ -20,12 +20,14 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@black.com',
             'email_verified_at' => now(),
             'password' => Hash::make('secret'),
+            'role'=> 'ADMIN',
             'created_at' => now(),
             'updated_at' => now()
         ],['id' => 2,
-            'name' => '',
+            'name' => 'Foulen Ben Foulen',
             'email' => 'ff@example.com',
             'email_verified_at' => now(),
+            'role'=> 'USER',
             'password' => Hash::make('pass'),
             'created_at' => now(),
             'updated_at' => now()]]);
