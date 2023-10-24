@@ -124,6 +124,16 @@ Route::group(['prefix'=>'skills', 'as'=>'skill.', 'middleware' => 'auth'], funct
     Route::get('result/{quizId}', ['as' => 'result_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@resultQuiz']);
 });
 
+Route::group(['prefix'=>'newsfeed', 'as'=>'newsfeed.', 'middleware' => 'auth'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@index']);
+    Route::post('', ['as' => 'addPost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@addPost']);
+    Route::get('/{id}', ['as' => 'detail', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@postdetails']);
+    Route::post('/addComment/{id}', ['as' => 'addComment', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@addComment']);
+    Route::put('/update/{id}', ['as' => 'updatePost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@updatePost']);
+    Route::delete('/{id}', ['as' => 'deletePost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@deletePost']);
+});
+
+
 Route::group(['prefix'=>'products', 'as'=>'product.', 'middleware' => 'auth'], function () {
     Route::view('', 'frontoffice.pages.market.shop',['productList' => Product::all(), 'categoryList' => Category::all() ])->name('list');
     Route::get('product/{id}', 'App\Http\Controllers\frontoffice\ProductController@show')->name('show');
@@ -131,6 +141,7 @@ Route::group(['prefix'=>'products', 'as'=>'product.', 'middleware' => 'auth'], f
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@addProduct']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@updateProduct']);
     Route::post('checkout/{id}', ['as' => 'checkout', 'uses' => 'App\Http\Controllers\frontoffice\ProductController@session']);
+
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -153,7 +164,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('jobs', ['as' => 'jobs', 'uses' => 'App\Http\Controllers\frontoffice\TestController@jobs']);
-    Route::get('newsfeed', ['as' => 'newsfeed', 'uses' => 'App\Http\Controllers\frontoffice\TestController@newsfeed']);
+
     Route::get('shop', ['as' => 'shop', 'uses' => 'App\Http\Controllers\frontoffice\TestController@shop']);
     Route::get('product', ['as' => 'product', 'uses' => 'App\Http\Controllers\frontoffice\TestController@product']);
     Route::get('events', ['as' => 'product', 'uses' => 'App\Http\Controllers\frontoffice\TestController@events']);

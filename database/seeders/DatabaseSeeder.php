@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call([AnswerSeeder::class]);
         $this->call([CategorySeeder::class]);
         $this->call([JobSeeder::class]);
-        $this->call([ProductSeeder::class]);
+        $this->call([PostSeeder::class]);
     }
 }
