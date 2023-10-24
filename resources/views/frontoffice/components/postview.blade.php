@@ -1,48 +1,29 @@
-@for($i =0 ; $i < count($posts); $i++)
 <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
     <div class="card-body p-0 d-flex">
-        <figure class="avatar me-3"><img src="{{ asset('frontoffice') }}/images/{{$posts[$i]->avater}}" alt="avater"
-                                             class="shadow-sm rounded-circle w45"/></figure>
-        <h4 class="fw-700 text-grey-900 font-xssss mt-1"> {{$posts[$i]->user}} <span
-                class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"> {{$posts[$i]->time}}</span></h4>
+        <figure class="avatar me-3"><img src="{{ asset('frontoffice') }}/images/user.png" alt="avater"
+                                         class="shadow-sm rounded-circle w45"/></figure>
+        <h4 class="fw-700 text-grey-900 font-xssss mt-1"> {{$post->createdBy->name}} <span
+                class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500"> {{$post->created_at}}</span></h4>
         <div class="ms-auto pointer"><i
                 class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></div>
 
     </div>
     <div class="card-body p-0 me-lg-5">
-        <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2">{{$posts[$i]->des}} <a href="/defaultvideo"
-                                                                                 class="fw-600 text-primary ms-2">See
-                more</a></p>
+        <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 mb-2">{{$post->description}}
+{{--            <a href="/defaultvideo" class="fw-600 text-primary ms-2">See more</a></p>--}}
     </div>
     <div class="card-body d-block p-0 mb-3">
         <div class="row ps-2 pe-2">
-            <div class="col-sm-12 p-1"><img src="{{ asset('frontoffice') }}/images/{{$posts[$i]->postimage}}"
-                                                class="rounded-3 w-100" alt="post"/></div>
+{{--            <div class="col-sm-12 p-1"><img src="{{ asset('frontoffice') }}/images/{{$post->postimage}}"--}}
+{{--                                            class="rounded-3 w-100" alt="post"/></div>--}}
         </div>
     </div>
     <div class="card-body d-flex p-0">
-        <div
-            class="emoji-bttn pointer d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2"
-            onClick={toggleActive}><i
-                class="feather-thumbs-up text-white bg-primary-gradiant me-1 btn-round-xs font-xss"></i> <i
-                class="feather-heart text-white bg-red-gradiant me-2 btn-round-xs font-xss"></i>2.8K Like
-        </div>
-        <div class="emoji-wrap pointer ${emojiClass}">
-            <ul class="emojis list-inline mb-0">
-                <li class="emoji list-inline-item"><i class="em em---1"></i></li>
-                <li class="emoji list-inline-item"><i class="em em-angry"></i></li>
-                <li class="emoji list-inline-item"><i class="em em-anguished"></i></li>
-                <li class="emoji list-inline-item"><i class="em em-astonished"></i></li>
-                <li class="emoji list-inline-item"><i class="em em-blush"></i></li>
-                <li class="emoji list-inline-item"><i class="em em-clap"></i></li>
-                <li class="emoji list-inline-item"><i class="em em-cry"></i></li>
-                <li class="emoji list-inline-item"><i class="em em-full_moon_with_face"></i></li>
-            </ul>
-        </div>
+
         <a href="/defaultvideo"
            class="d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss"><i
                 class="feather-message-circle text-dark text-grey-900 btn-round-sm font-lg"></i><span
-                class="d-none-xss">22 Comment</span></a>
+                class="d-none-xss">{{sizeof($post->comments)}} Comment</span></a>
         <div
             class="pointer ms-auto d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss ${menuClass}"
             id={`dropdownMenu${id}`} data-bs-toggle="dropdown" aria-expanded="false" onClick={toggleOpen}>
@@ -88,4 +69,4 @@
         </div>
     </div>
 </div>
-@endfor
+
