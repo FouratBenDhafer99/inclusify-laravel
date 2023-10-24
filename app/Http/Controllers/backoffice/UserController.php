@@ -17,4 +17,8 @@ class UserController extends Controller
     {
         return view('backoffice.users.index', ['users' => $model->paginate(15)]);
     }
+
+    public function listUsers(){
+        return view('backoffice.users.index', ['users' => User::all()]);
+    }
 }

@@ -27,7 +27,7 @@
                             </a>
                         </li>
                         <li >
-                            <a href="{{ route('user.index')  }}">
+                            <a href="{{ route('admin.user.list')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ __('User Management') }}</p>
                             </a>

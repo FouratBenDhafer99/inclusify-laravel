@@ -45,6 +45,11 @@ Route::group(['prefix'=>'admin/profile', 'middleware' => 'auth'], function () {
 	Route::put('password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\backoffice\ProfileController@password']);
 });
 
+Route::group(['prefix'=>'admin/users', 'as'=>'admin.user.', 'middleware' => 'auth'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\UserController@listUsers']);
+});
+
+
 Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'auth'], function () {
     //Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
     Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
