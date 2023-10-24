@@ -51,18 +51,18 @@
                                                 {{$skill->created_at}}
                                             </td>
                                             <td class="text-primary">
-                                                <button class="btn btn-sm btn-primary">See quizzes</button>
                                                 <a href="{{ route('admin.skill.form', $skill->id) }}"
                                                    class="btn btn-sm btn-info text-white">Edit</a>
                                                 <a href="{{ route('admin.skill.delete', $skill->id) }}"
                                                    class="btn btn-sm btn-danger text-white">Delete</a>
-
-
                                             </td>
                                         </tr>
                                     @endforeach
                                     </tbody>
                                 </table>
+                            </div>
+                            <div class="">
+                                {{$skills->links()}}
                             </div>
                         </div>
                     </div>

@@ -80,40 +80,6 @@
                     </ul>
                 </div>
 
-                <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1 mb-2">
-                    <div class="nav-caption fw-600 font-xssss text-grey-500"><span>More </span>Pages</div>
-                    <ul class="mb-3">
-                        <li><a to="/defaultemailbox" class="nav-content-bttn open-font"><i
-                                    class="font-xl text-current feather-inbox me-3"></i><span>Email Box</span><span
-                                    class="circle-count bg-warning mt-1">584</span></a></li>
-                        <li><a to="/defaulthotel" class="nav-content-bttn open-font"><i
-                                    class="font-xl text-current feather-home me-3"></i><span>Near Hotel</span></a>
-                        </li>
-                        <li><a to="/defaultevent" class="nav-content-bttn open-font"><i
-                                    class="font-xl text-current feather-map-pin me-3"></i><span>Latest Event</span></a>
-                        </li>
-                        <li><a to="/defaultlive" class="nav-content-bttn open-font"><i
-                                    class="font-xl text-current feather-youtube me-3"></i><span>Live Stream</span></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav-wrap bg-white bg-transparent-card rounded-xxl shadow-xss pt-3 pb-1">
-                    <div class="nav-caption fw-600 font-xssss text-grey-500"><span></span> Account</div>
-                    <ul class="mb-1">
-                        <li class="logo d-none d-xl-block d-lg-block"></li>
-                        <li><a to="/defaultsettings" class="nav-content-bttn open-font h-auto pt-2 pb-2"><i
-                                    class="font-sm feather-settings me-3 text-grey-500"></i><span>Settings</span></a>
-                        </li>
-                        <li><a to="/defaultanalytics"
-                               class="nav-content-bttn open-font h-auto pt-2 pb-2"><i
-                                    class="font-sm feather-pie-chart me-3 text-grey-500"></i><span>Analytics</span></a>
-                        </li>
-                        <li><a to="/defaultmessage"
-                               class="nav-content-bttn open-font h-auto pt-2 pb-2"><i
-                                    class="font-sm feather-message-square me-3 text-grey-500"></i><span>Chat</span><span
-                                    class="circle-count bg-warning mt-0">23</span></a></li>
-                    </ul>
-                </div>
             </div>
         </div>
     </nav>
