@@ -66,8 +66,12 @@
                         <li><a href="{{ route('skill.list') }}" class="nav-content-bttn open-font"><i
                                     class="feather-award btn-round-md bg-red-gradiant me-3"></i><span>Skills</span></a>
                         </li>
+                        <li><a href="{{ route('event.list') }}" class="nav-content-bttn open-font"><i
+                                    class="feather-globe btn-round-md bg-gold-gradiant me-3"></i><span>Events</span></a>
+                        </li>
                         <li><a href="{{route('jobslist')}}" class="nav-content-bttn open-font"><i
                                     class="feather-briefcase btn-round-md bg-gold-gradiant me-3"></i><span>Job board</span></a>
+                        </li>
                         <li><a href="{{ route('product.list') }}" class="nav-content-bttn open-font"><i
                                     class="feather-shopping-bag btn-round-md bg-gold-gradiant me-3"></i><span>Marketplace</span></a>
                         </li>
