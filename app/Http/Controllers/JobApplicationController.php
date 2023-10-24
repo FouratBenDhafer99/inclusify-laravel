@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Notifications\ApplyNotification;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 
 use App\Models\JobApplication;
@@ -139,5 +141,19 @@ public function updateStatus(Request $request, $id)
         $jobApplication->delete();
 
         return redirect()->route('jobs.ApplicationByConnectedUser')->with('success', 'Job deleted successfully');
+    }
+    
+    public function downloadResume($filename) {
+        $filePath = storage_path('app/resumes/' . $filename);
+    
+        if (file_exists($filePath)) {
+            $headers = [
+                'Content-Type' => mime_content_type($filePath),
+                'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            ];
+            return response()->file($filePath, $headers);
+        } else {
+            abort(404, 'File not found');
+        }
     }
 }
