@@ -71,7 +71,7 @@ class ProductController extends Controller
                         'product_data' => [
                             'name' => $product->name,
                         ],
-                        'unit_amount'  => $product->quantity,
+                        'unit_amount'  => $product->price * 100,
                     ],
                     'quantity'   =>  1,
                 ],
@@ -79,6 +79,15 @@ class ProductController extends Controller
             'mode'        => 'payment',
             'success_url' => route('product.list'),
             'cancel_url'  => route('product.list'),
+        ]);
+
+        Product::where('id',$id)->update([
+            'name'=>$product->name,
+            'description'=>$product->description,
+            'price'=>$product->price,
+            'quantity'=>$product->quantity - 1,
+            'image'=>$product->image ?? Product::find($id)->image,
+            'category_id' => $product->category_id
         ]);
 
         return redirect()->away($session->url);
