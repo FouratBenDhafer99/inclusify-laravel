@@ -6,8 +6,7 @@
             <div class="middle-sidebar-left">
                 <div class="row feed-body">
                     <div class="col-xl-8 col-xxl-9 col-lg-8">
-                        <form method="post" action="{{route("newsfeed.addPost")}}"
-                        >
+                        <form method="post" action="{{route("newsfeed.addPost")}}" enctype="multipart/form-data">
                             @csrf
                             @method("post")
                             <div class="card w-100 shadow-xss rounded-xxl border-0 ps-4 pt-4 pe-4 pb-3 mb-3">
@@ -44,10 +43,12 @@
                                        class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4"><i
                                             class="font-md text-danger feather-video me-2"></i><span
                                             class="d-none-xs">Live Video</span></a>
-                                    <a href="#photo"
-                                       class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4"><i
-                                            class="font-md text-success feather-image me-2"></i><span
-                                            class="d-none-xs">Photo/Video</span></a>
+                                    <input type="file" id="imageInput" name="image" class="d-none" accept="image/*">
+
+                                    <a href="#" id="imageLink" class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4">
+                                        <i class="font-md text-success feather-image me-2"></i>
+                                        <span class="d-none-xs">Photo/Video</span>
+                                    </a>
                                     <a href="#activity"
                                        class="d-flex align-items-center font-xssss fw-600 ls-1 text-grey-700 text-dark pe-4"><i
                                             class="font-md text-warning feather-camera me-2"></i><span
