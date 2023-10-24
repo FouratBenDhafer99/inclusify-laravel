@@ -26,11 +26,6 @@ class Quiz extends Model implements BlamableAwareInterface
         return $this->belongsTo(Skill::class, 'skill_id');
     }
 
-    public function player()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function questions()
     {
         return $this->belongsToMany(Question::class);

@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 class SkillController extends Controller
 {
 
+    public function skillList(){
+        $skills = Skill::paginate(5);
+        return view('backoffice.pages.skills.skill_list', compact('skills', ));
+    }
     public function skillForm($id = null)
     {
         $skill= Skill::find($id);

@@ -12,13 +12,13 @@
                 </a>
             </li>
             <li>
-                <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
+                <a data-toggle="collapse" href="#users" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Laravel Examples') }}</span>
+                    <span class="nav-link-text" >{{ __('User management') }}</span>
                         <b class="caret mt-1"></b>
                 </a>
 
-                <div class="collapse" id="laravel-examples">
+                <div class="collapse" id="users">
                     <ul class="nav pl-4">
                         <li  class="active ">
                             <a href="{{ route('profile.edit')  }}">
@@ -27,21 +27,9 @@
                             </a>
                         </li>
                         <li >
-                            <a href="{{ route('user.index')  }}">
+                            <a href="{{ route('admin.user.list')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ __('User Management') }}</p>
-                            </a>
-                        </li>
-                        <li >
-                            <a href="{{ route('jobs.list')  }}">
-                                <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ __('Job Management') }}</p>
-                            </a>
-                        </li>
-                        <li >
-                            <a href="{{ route('jobs.jobAppList')  }}">
-                                <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ __('Job Applications Management') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -68,10 +56,29 @@
                                 <p>{{ __('Questions') }}</p>
                             </a>
                         </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li>
+                <a data-toggle="collapse" href="#jobs" aria-expanded="true">
+                    <i class="tim-icons icon-bank" ></i>
+                    <span class="nav-link-text" >{{ __('Job management') }}</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse dropdown" id="jobs">
+                    <ul class="nav pl-4">
                         <li >
-                            <a>
-                                <i class="tim-icons icon-puzzle-10"></i>
-                                <p>{{ __('Quizzes') }}</p>
+                            <a href="{{ route('jobs.list')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ __('Job Management') }}</p>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="{{ route('jobs.jobAppList')  }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ __('Job Applications Management') }}</p>
                             </a>
                         </li>
                     </ul>
@@ -111,42 +118,6 @@
                 <a href="{{ route('pages.icons') }}">
                     <i class="tim-icons icon-atom"></i>
                     <p>{{ __('Icons') }}</p>
-                </a>
-            </li>
-            <li >
-                <a href="{{ route('pages.maps') }}">
-                    <i class="tim-icons icon-pin"></i>
-                    <p>{{ __('Maps') }}</p>
-                </a>
-            </li>
-            <li >
-                <a href="{{ route('pages.notifications') }}">
-                    <i class="tim-icons icon-bell-55"></i>
-                    <p>{{ __('Notifications') }}</p>
-                </a>
-            </li>
-            <li >
-                <a href="{{ route('pages.tables') }}">
-                    <i class="tim-icons icon-puzzle-10"></i>
-                    <p>{{ __('Table List') }}</p>
-                </a>
-            </li>
-            <li >
-                <a href="{{ route('pages.typography') }}">
-                    <i class="tim-icons icon-align-center"></i>
-                    <p>{{ __('Typography') }}</p>
-                </a>
-            </li>
-            <li >
-                <a href="{{ route('pages.rtl') }}">
-                    <i class="tim-icons icon-world"></i>
-                    <p>{{ __('RTL Support') }}</p>
-                </a>
-            </li>
-            <li >
-                <a href="{{ route('pages.upgrade') }}">
-                    <i class="tim-icons icon-spaceship"></i>
-                    <p>{{ __('Upgrade to PRO') }}</p>
                 </a>
             </li>
         </ul>

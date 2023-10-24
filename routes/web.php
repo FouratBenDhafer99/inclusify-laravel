@@ -55,16 +55,23 @@ Route::group(['prefix'=>'admin/profile', 'middleware' => 'auth'], function () {
 	Route::put('password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\backoffice\ProfileController@password']);
 });
 
-Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'auth'], function () {
+Route::group(['prefix'=>'admin/users', 'as'=>'admin.user.', 'middleware' => 'admin'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\UserController@listUsers']);
+    Route::put('/grantAdmin/{userId}', ['as' => 'grantAdmin', 'uses' => 'App\Http\Controllers\backoffice\UserController@grantAdminRole']);
+    Route::put('/revokeAdmin/{userId}', ['as' => 'revokeAdmin', 'uses' => 'App\Http\Controllers\backoffice\UserController@revokeAdminRole']);
+});
+
+
+Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'admin'], function () {
     Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
-    Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
+    //Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\SkillController@addSkill']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\SkillController@deleteSkill']);
 });
 
-Route::group(['prefix'=>'admin/categories', 'as'=>'admin.category.', 'middleware' => 'auth'], function () {
+Route::group(['prefix'=>'admin/categories', 'as'=>'admin.category.', 'middleware' => 'admin'], function () {
     Route::view('', 'backoffice.pages.categories.category_list', ['categories' => Category::all()])->name('list');
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@categoryForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@addCategory']);
@@ -72,18 +79,18 @@ Route::group(['prefix'=>'admin/categories', 'as'=>'admin.category.', 'middleware
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\CategoryController@deleteCategory']);
 });
 
-Route::group(['prefix'=>'admin/products', 'as'=>'admin.product.', 'middleware' => 'auth'], function () {
+Route::group(['prefix'=>'admin/products', 'as'=>'admin.product.', 'middleware' => 'admin'], function () {
     Route::view('', 'backoffice.pages.products.product_list', ['products' => Product::all()])->name('list');
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\ProductController@deleteProduct']);
 });
 
 
-Route::group(['prefix'=>'admin/questions', 'as'=>'admin.question.', 'middleware' => 'auth'], function () {
-    Route::view('', 'backoffice.pages.questions.question_list', ['questions' => Question::with('skill')->get()])->name('list');
+Route::group(['prefix'=>'admin/questions', 'as'=>'admin.question.', 'middleware' => 'admin'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@listQuestions']);
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@questionForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@addQuestion']);
-    Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@updateQuestion']);
-    //Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\SkillController@deleteSkill']);
+    //Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@updateQuestion']);
+    Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@deleteQuestion']);
 });
 
 //Frontoffice
@@ -120,10 +127,6 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('jobApplications/{id}', 'App\Http\Controllers\JobApplicationController@updateStatus')->name('jobApplication.UpdateStatus');
 	route::get('myApplications', 'App\Http\Controllers\JobApplicationController@jobApplicationsByConnectedUser')->name('jobs.ApplicationByConnectedUser');
 	Route::delete('jobApplications/{id}', 'App\Http\Controllers\JobApplicationController@destroyFront')->name('jobApp.destroyFront');
-
-
-
-
 
 
 
@@ -169,7 +172,9 @@ Route::group(['prefix' => 'events', 'as' => 'event.', 'middleware' => 'auth'], f
 
 /////////////////////////******************End E V E N T S********************////////////////////////////////////////
 
+Route::group([ 'middleware' => 'auth'], function () {
+    Route::get('/unauthorized', ['as' => 'unauthorized', 'uses' => 'App\Http\Controllers\frontoffice\UtilPagesController@unauthorized']);
+});
 Route::resource('jobs', JobController::class);
 Route::resource('job-applications', JobApplicationController::class);
-
 

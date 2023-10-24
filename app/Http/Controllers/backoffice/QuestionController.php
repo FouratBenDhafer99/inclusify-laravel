@@ -9,6 +9,11 @@ use App\Models\Skill;
 
 class QuestionController extends Controller
 {
+
+    public function listQuestions(){
+        $questions = Question::with('skill')->paginate(5);
+        return view('backoffice.pages.questions.question_list', compact('questions', ));
+    }
     public function questionForm($id = null)
     {
         $skills = Skill::all();
@@ -35,23 +40,9 @@ class QuestionController extends Controller
         return back()->withStatus(__('Question successfully added.'));
     }
 
-    //TODO: fix update question
-    public function updateQuestion($id, QuestionRequest $request)
+    public function deleteQuestion($id)
     {
-        $validatedData = $request->validationData();
-        $skill = Skill::find($validatedData['skill']);
-        $question = $skill->questions()->find($id)->update([
-            'description' => $validatedData['description'],
-        ]);
-        $i = 0;
-        foreach ($validatedData['answers'] as $answerText) {
-            if ($answerText)
-                $question->answers()->updateOrCreate([
-                    'text'=> $answerText,
-                    'isCorrect'=> isset($validatedData['isCorrect'][$i])
-                ]);
-            $i++;
-        }
-        return back()->withStatus(__('Skill successfully updated. '));
+        Question::where('id',$id)->delete();
+        return back()->withStatus(__('Question successfully deleted. '));
     }
 }
