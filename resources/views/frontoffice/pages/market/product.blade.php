@@ -25,8 +25,8 @@
                     <div class="clearfix"></div>
                     @if (auth()->user()->id != $product->created_by)
                         <div class="product-action flex-row align-items-center">
-                            <a href="{{ route('product.form', $product->id) }}"
-                                class="add-to-cart bg-dark text-white fw-700 ps-lg-5 pe-lg-5 text-uppercase font-xssss float-left border-dark border rounded-3 border-size-md d-inline-block mt-0 p-3 text-center ls-3">Buy</a>
+                                                    <form action="{{ route('product.checkout', $product->id) }}" method="POST"><input type="hidden" name="_token" value="{{csrf_token()}}"><button type="submit" id="btn btn-secondary dropdown-toggle">Buy</button></form>
+
                         </div>
                     @else
                         <div class="product-action flex-row align-items-center">

@@ -79,12 +79,14 @@
                     <div class="nav-caption fw-600 font-xssss text-grey-500"><span>New </span>Feeds</div>
                     <ul class="mb-1 top-content">
                         <li class="logo d-none d-xl-block d-lg-block"></li>
-                        <li><a href="{{url("/newsfeed")}}" class="nav-content-bttn open-font"><i
+                        <li><a href="{{url("/newsfeed")}}"  class="nav-content-bttn open-font"><i
                                     class="feather-tv btn-round-md bg-blue-gradiant me-3"></i><span>Newsfeed</span></a>
                         </li>
                         <li><a href="{{ route('skill.list') }}" class="nav-content-bttn open-font"><i
                                     class="feather-award btn-round-md bg-red-gradiant me-3"></i><span>Skills</span></a>
                         </li>
+                        <li><a href="{{route('jobslist')}}" class="nav-content-bttn open-font"><i
+                                    class="feather-briefcase btn-round-md bg-gold-gradiant me-3"></i><span>Job board</span></a>
                         <li><a href="{{ route('product.list') }}" class="nav-content-bttn open-font"><i
                                     class="feather-shopping-bag btn-round-md bg-gold-gradiant me-3"></i><span>Marketplace</span></a>
                         </li>
