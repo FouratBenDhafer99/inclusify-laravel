@@ -85,24 +85,34 @@ Route::group(['middleware' => 'auth'], function () {
 
 ////////////////////////******************Start E V E N T S********************////////////////////////////////////////
 
+//Backoffice
 Route::middleware(['web'])->group(function () {
-    Route::get('/admin/events', [EventController::class, 'index'])->name('events.index');
-    Route::get('/admin/events/{event}', [EventController::class, 'show'])->name('events.show');
+    Route::resource('/admin/events', EventController::class);
+    
+    Route::post('/admin/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
     Route::get('/admin/events/create', [EventController::class, 'create'])->name('events.create');
-    Route::get('/admin/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
-    Route::put('/admin/events/{event}', [EventController::class, 'update'])->name('events.update');
-    Route::get('/admin/events/search', [EventController::class, 'search'])->name('events.search'); 
-    Route::delete('/admin/events/deleteAll', [App\Http\Controllers\events\EventController::class, 'deleteAll'])->name('events.deleteAll');
-    Route::post('/admin/events/deleteAll', [App\Http\Controllers\events\EventController::class, 'deleteAll'])->name('events.deleteAll');
-    Route::delete('/admin/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
-    Route::resource('events', EventController::class);
+    Route::post('/admin/events', [EventController::class, 'store'])->name('events.store');
+    Route::delete('/admin/events/deleteAll',[EventController::class, 'deleteAll'])->name('events.deleteAll');
+    Route::get('/admin/events/search', [EventController::class, 'search'])->name('events.search');
+    Route::get('/get-google-meet-link', [EventController::class, 'generateGoogleMeetLink'])->name('events.generateGoogleMeetLink');
+    
+    Route::resource('/admin/categories', CategorieController::class);
 
+    Route::post('/admin/categories/{event}', [CategorieController::class, 'destroy'])->name('categories.destroy');
     Route::get('/admin/categories/create', [CategorieController::class, 'create'])->name('categories.create');
     Route::post('/admin/categories', [CategorieController::class, 'store'])->name('categories.store');
     Route::post('/admin/categories/deleteAll', [App\Http\Controllers\events\CategorieController::class, 'deleteAll'])->name('categories.deleteAll');
-    Route::get('/admin/categories/search', [CategorieController::class, 'search'])->name('categories.search'); 
-    Route::resource('categories', CategorieController::class);
-
+    Route::get('/admin/categories/search', [CategorieController::class, 'search'])->name('categories.search');
 });
+
+
+//Frontoffice
+Route::group(['prefix' => 'events', 'as' => 'event.', 'middleware' => 'auth'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\frontoffice\EventController@listEvents']);
+    Route::get('join/{event}', ['as' => 'join', 'uses' => 'App\Http\Controllers\frontoffice\EventController@joinEvent']);
+    Route::get('cancelJoin/{event}', ['as' => 'cancelJoin', 'uses' => 'App\Http\Controllers\frontoffice\EventController@cancelJoin']);
+    Route::get('detail/{event}', ['as' => 'detail', 'uses' => 'App\Http\Controllers\frontoffice\EventController@detail']);
+});
+
 
 /////////////////////////******************End E V E N T S********************////////////////////////////////////////

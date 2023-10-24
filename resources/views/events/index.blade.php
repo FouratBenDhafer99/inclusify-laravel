@@ -44,25 +44,24 @@
 ****************************************************************************************************************************************-->
 
 <div class="container">
-
     <ul class="nav nav-tabs" id="myTabs">
         <li class="nav-item">
-            <a class="nav-link active" id="eventsTab" data-toggle="tab" href="#eventsContent">Events</a>
+            <a class="nav-link {{ request()->input('activeTab') === 'eventsTab' ? 'active' : '' }}" id="eventsTab" data-toggle="tab" href="#eventsContent">Events</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="categoryTab" data-toggle="tab" href="#categoryContent">Category</a>
+            <a class="nav-link {{ request()->input('activeTab') === 'categoryTab' ? 'active' : '' }}" id="categoryTab" data-toggle="tab" href="#categoryContent">Category</a>
         </li>
     </ul>
 
     <div class="tab-content">
-        <div class="tab-pane fade show active" id="eventsContent">
+        <div class="tab-pane fade {{ request()->input('activeTab') === 'eventsTab' ? 'show active' : '' }}" id="eventsContent">
             <br>
             <h1>Events</h1>
             <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
                 <input type="text" id="searchInput" class="form-control" placeholder="Search Events">
                 <div style="display: flex; gap: 10px;">
-                    <button type="button" class="btn btn-primary" id="removeAllButton">Remove All</button>
-                    <a href="{{ route('events.create') }}" class="btn btn-success">Create New Event</a>
+                <button type="button" class="btn btn-primary remove-all-button" data-url="{{ route('events.deleteAll') }}" data-type="events">Remove All</button>
+                <a href="{{ route('events.create') }}" class="btn btn-success">Create New Event</a>
                 </div>
             </div>
 
@@ -84,7 +83,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Select</th>
                             <th>Name</th>
                             <th>Date</th>
                             <th>Location</th>
@@ -97,13 +95,10 @@
                     <tbody>
                         @foreach ($data['events'] as $event)
                         <tr>
-                            <td>
-                                <input type="checkbox" name="selectedEvents[]" value="{{ $event->id }}" data-event-id="{{ $event->id }}">
-                            </td>
                             <td>{{ $event->name }}</td>
                             <td>{{ $event->date }}</td>
                             <td>{{ $event->location }}</td>
-                            <td>{{ $event->organizer }}</td>
+                            <td>{{ $event->organizer->name }}</td>
                             <td>{{ $event->status }}</td>
                             <td>{{ $event->capacity }}</td>
                             <td>
@@ -114,10 +109,10 @@
                                     <a href="{{ route('events.edit', $event->id) }}" class="btn btn-link">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <form id="deleteSingleEventForm" method="POST" action="{{ route('events.destroy', $event->id) }}">
+                                    <form method="POST" action="{{ route('events.destroy', $event->id) }}">
                                         @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-link" onclick="confirmDelete('{{ route('events.destroy', $event->id) }}', 'single')">
+                                        @method('DELETE') 
+                                        <button class="btn btn-link" type="submit" onclick="return confirm('Are you sure you want to delete this event?');">
                                             <i class="fas fa-trash-alt"></i>
                                         </button>
                                     </form>
@@ -139,11 +134,11 @@
         ****************************************************************************************************************************************-->
 
         <!-- Category tab content -->
-        <div class="tab-pane fade" id="categoryContent">
+        <div class="tab-pane fade {{ request()->input('activeTab') === 'categoryTab' ? 'show active' : '' }}" id="categoryContent">
             <br>
             <h1>Category</h1>
             <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
-                <input type="text" id="searchInput" class="form-control" placeholder="Search Categorys">
+                <input type="text" id="searchCategoryInput" class="form-control" placeholder="Search Categorys">
                 <div style="display: flex; gap: 10px;">
                     <button type="button" class="btn btn-primary" id="removeAllCategoriesButton">Remove All</button>
                     <a href="{{ route('categories.create') }}" class="btn btn-success">Create New Category</a>
@@ -151,13 +146,12 @@
             </div>
 
 
-            <div id="noCategorysMessage" style="display: none;">
+            <div id="noCategoriesMessage" style="display: none;">
                 <div class="center-content">
                     <h2>The searched product is either not existent or no longer available, <br>unless you have a time travel machine.<br></h2>
-                    <img src="{{ asset('frontoffice/images/noevents.png') }}" alt="No Categorys Found">
+                    <img src="{{ asset('frontoffice/images/noevents.png') }}" alt="No Events Found">
                 </div>
             </div>
-
 
             @if (count($data['categories']) === 0)
                 <p>No categories found.</p>
@@ -168,7 +162,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Select</th>
                             <th>Name</th>
                             <th>Actions</th>
                         </tr>
@@ -176,27 +169,20 @@
                     <tbody>
                         @foreach ($data['categories'] as $category)
                         <tr>
-                            <td>
-                                <input type="checkbox" name="selectedCategorys[]" value="{{ $category->id }}" data-category-id="{{ $category->id }}">
-                            </td>
                             <td>{{ $category->name }}</td>
                             <td>
-                                <div class="btn-group">
-                                    <a href="" class="btn btn-link">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="" class="btn btn-link">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form id="deleteSingleCategoryForm" method="POST" action="">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-link" onclick="confirmDelete()">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </form>
-
-                                </div>
+                            <div class="btn-group">
+                                <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-link">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <form method="POST" action="{{ route('categories.destroy', $category->id) }}" id="deleteCategoryForm">
+                                    @csrf
+                                    @method('DELETE') 
+                                    <button class="btn btn-link" type="submit" onclick="confirmDelete('{{ route('categories.deleteAll') }}', 'all')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
                             </td>
                         </tr>
                         @endforeach
@@ -213,7 +199,7 @@
 
 
 
-<div class="modal fade" id="deleteConfirmationModalCategorie" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+<div class="modal fade delete-confirmation-modal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -223,7 +209,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete the selected categories?
+                Are you sure you want to delete all the categories?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -232,13 +218,6 @@
         </div>
     </div>
 </div>
-
-<form id="deleteMultipleCategoriesForm" method="POST" action="{{ route('categories.deleteAll') }}">
-    @csrf
-    @method('POST')
-    <input type="hidden" id="selectedCategories" name="selectedCategories" value="">
-</form>
-
 
 
 
@@ -253,7 +232,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete the selected events?
+                Are you sure you want to delete all the events?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -263,11 +242,46 @@
     </div>
 </div>
 
-<form id="deleteMultipleEventForm" method="POST" action="{{ route('events.deleteAll') }}">
-    @csrf
-    @method('POST')
-    <input type="hidden" id="selectedEvents" name="selectedEvents" value="">
-</form>
-
 @endsection
 
+@section('scripts')
+<script>
+    function handleDeleteAll(url, type) {
+        if (confirm(`Are you sure you want to delete all ${type}?`)) {
+            const deleteAllForm = document.getElementById('deleteAllForm');
+            deleteAllForm.action = url;
+            deleteAllForm.submit();
+        }
+    }
+
+    function confirmDelete(deleteUrl, deletionType) {
+        if (deletionType === 'single') {
+            window.location.href = deleteUrl;
+        } else {
+            // If it's multiple event deletion, display the modal
+            $('#deleteConfirmationModal').modal('show');
+            $('#confirmDelete').off('click').on('click', function () {
+                $('#deleteConfirmationModal').modal('hide');
+                console.log('Submitting the form');
+                $('#deleteForm').attr('action', deleteUrl).submit();
+            });
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const removeAllButtons = document.querySelectorAll('.remove-all-button');
+        removeAllButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const url = this.getAttribute('data-url');
+                const type = this.getAttribute('data-type');
+                handleDeleteAll(url, type);
+            });
+        });
+    });
+
+   
+
+</script>
+
+@endsection

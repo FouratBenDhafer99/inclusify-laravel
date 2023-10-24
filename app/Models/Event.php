@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Categories;
+use App\Models\User;
 
 class Event extends Model
 {
@@ -16,10 +18,31 @@ class Event extends Model
         'description',
         'date',
         'location',
-        'organizer',
         'status',
         'capacity',
         'registration_deadline',
         'image',
+        'organizer_id',
+        'category_id',
     ];
+    
+    protected $casts = [
+        'date' => 'datetime',
+    ];
+
+    public function category()
+    {
+        return $this->belongsTo(Categories::class, 'category_id');
+    }
+
+    public function attendees()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function organizer()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

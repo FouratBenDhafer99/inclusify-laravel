@@ -5,6 +5,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Categories;
+use Google_Client;
+use Google_Service_Calendar;
+use Google_Service_Calendar_Event;
+use Illuminate\Support\Facades\Log;
+use App\Models\User;
+use App\Http\Requests\EventRequest;
 
 class EventController extends Controller
 {
@@ -22,15 +28,28 @@ class EventController extends Controller
 
     public function create()
     {
-        return view('events.create');
+        $users = User::all();
+        $categories = Categories::all();
+        return view('events.create', ['users' => $users, 'categories' => $categories]);
     }
 
-    public function store(Request $request)
+    public function store(EventRequest $request) 
     {
-        $event = Event::create($request->all());
+        try {
+            $data = $request->validated(); 
 
-        return redirect()->route('events.index')
-            ->with('success', 'Event created successfully.');
+            if ($request->hasFile('image')) {
+                $imagePath = $request->file('image')->store('event_images', 'public');
+                $data['image'] = $imagePath;
+            }
+
+            $event = Event::create($data);
+
+            return redirect()->route('events.index')
+                ->with('success', 'Event created successfully');
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 
     public function show($id)
@@ -42,19 +61,34 @@ class EventController extends Controller
 
     public function edit($id)
     {
+        $users = User::all();
+        $categories = Categories::all();
         $event = Event::findOrFail($id);
-
-        return view('events.edit', compact('event'));
+        return view('events.edit',  ['event'=>$event, 'users' => $users, 'categories' => $categories]);
     }
 
-    public function update(Request $request, $id)
+    public function update(EventRequest $request, $id)
     {
-        $event = Event::findOrFail($id);
-        $event->update($request->all());
-
-        return redirect()->route('events.index')
-            ->with('success', 'Event updated successfully.');
+        try {
+            $event = Event::findOrFail($id);
+            $event->update($request->validated());
+    
+            if ($request->hasFile('image')) {
+                $newImage = $request->file('image');
+    
+                $imagePath = $newImage->store('images', 'public');
+                $event->image = $imagePath;
+                $event->save();
+            }
+            return redirect()->route('events.index')
+                ->with('success', 'Event updated successfully.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'An error occurred while updating the event.');
+        }
     }
+    
+    
+
 
     public function destroy($id)
     {
@@ -73,25 +107,42 @@ class EventController extends Controller
     
         return view('events.search_results', compact('events'));
     }
+
     
-    public function deleteAll(Request $request)
+    public function deleteAll()
     {
-        $selectedEventIds = $request->input('selectedEvents');
+        Event::query()->delete();
 
-        if (is_array($selectedEventIds)) {
-            // Multiple events selected for deletion
-            foreach ($selectedEventIds as $eventId) {
-                $event = Event::findOrFail($eventId);
-                $event->delete();
-            }
-        } elseif (!empty($selectedEventIds)) {
-            // Single event selected for deletion
-            $event = Event::findOrFail($selectedEventIds);
-            $event->delete();
-        }
-
-        return redirect()->route('events.index')->with('success', 'Event(s) deleted successfully.');
+        return redirect()->route('events.index')
+            ->with('success', 'All events have been deleted.');
     }
-
     
+    
+
+    public function generateGoogleMeetLink()
+    {
+        try {
+            $client = new Google_Client();
+            $client->setAuthConfig(storage_path('app/inclusify-402519-954fb7ca73eb.json'));
+            $client->setSubject('oumaima.ayachi@esprit.tn');
+            $client->setAccessType('offline');
+            $client->setApprovalPrompt('force');
+            $client->fetchAccessTokenWithAssertion();
+            $service = new Google_Service_Calendar($client);
+            $event = new Google_Service_Calendar_Event();
+            $calendarId = 'primary';
+            $event = $service->events->insert($calendarId, $event);
+            $meetLink = $event->getConferenceData()->getEntryPoints()[0]->getUri();
+            Log::info($meetLink);
+            return $meetLink;
+        } catch (\Exception $e) {
+            Log::error('Error in generateGoogleMeetLink: ' . $e->getMessage());
+            return response('Internal Server Error', 500);
+        }
+    }
+    
+    
+    
+    
+
 }

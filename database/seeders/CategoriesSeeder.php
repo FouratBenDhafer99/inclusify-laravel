@@ -10,15 +10,16 @@ class CategoriesSeeder extends Seeder
 {
     public function run()
     {
-        // Define the data for categories
+        // Define the categories you want to seed
         $categories = [
             ['name' => 'Category 1'],
             ['name' => 'Category 2'],
             ['name' => 'Category 3'],
-            // Add more categories as needed
         ];
 
-        // Insert the data into the 'categories' table
-        Categories::insert($categories);
+        // Seed the categories
+        foreach ($categories as $category) {
+            Categories::create($category);
+        }
     }
 }

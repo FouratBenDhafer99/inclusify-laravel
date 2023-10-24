@@ -3,12 +3,17 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Event;
 
 class Categories extends Model
 {
-    public $timestamps = false; // Disable timestamps
+    public $timestamps = false;
 
     protected $fillable = [
         'name',
     ];
+        public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

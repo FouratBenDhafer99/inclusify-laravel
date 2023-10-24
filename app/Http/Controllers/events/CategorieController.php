@@ -49,7 +49,26 @@ class CategorieController extends Controller
     
         return redirect()->route('events.index')->with('success', 'Category(s) deleted successfully.');
     }
-    
 
+    public function edit($id)
+    {
+        $category = Categories::findOrFail($id);
+        return view('categories.edit', compact('category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+        ]);
+    
+        $category = Categories::findOrFail($id);
+        $category->name = $request->input('name');
+        $category->save();
+    
+        return redirect()->route('events.index', ['activeTab' => 'categoryTab'])->with('success', 'Category updated successfully.');
+    }
+    
+    
 
 }
