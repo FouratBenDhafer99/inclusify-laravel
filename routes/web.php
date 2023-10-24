@@ -5,6 +5,8 @@ use App\Models\Question;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\events\EventController;
+use App\Http\Controllers\events\CategorieController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobApplicationController;
 
@@ -32,6 +34,7 @@ Route::get('/admin/dashboard', 'App\Http\Controllers\HomeController@index')->nam
 
 Route::group(['prefix'=>'admin','middleware' => 'auth'], function () {
 		Route::get('icons', ['as' => 'pages.icons', 'uses' => 'App\Http\Controllers\backoffice\PageController@icons']);
+		//Route::get('events', ['as' => 'events.index', 'uses' => 'App\Http\Controllers\backoffice\PageController@events']);
 		Route::get('maps', ['as' => 'pages.maps', 'uses' => 'App\Http\Controllers\backoffice\PageController@maps']);
 		Route::get('notifications', ['as' => 'pages.notifications', 'uses' => 'App\Http\Controllers\backoffice\PageController@notifications']);
 		Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'App\Http\Controllers\backoffice\PageController@rtl']);
@@ -79,6 +82,29 @@ Route::group(['prefix'=>'admin/categories', 'as'=>'admin.category.', 'middleware
 Route::group(['prefix'=>'admin/products', 'as'=>'admin.product.', 'middleware' => 'admin'], function () {
     Route::view('', 'backoffice.pages.products.product_list', ['products' => Product::all()])->name('list');
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\ProductController@deleteProduct']);
+});
+
+Route::group(['prefix' => 'admin/events', 'as' => 'admin.events.', 'middleware' => 'admin'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\events\EventController@index']);
+    Route::resource('events', EventController::class);
+    Route::post('events/{event}', [EventController::class, 'destroy'])->name('destroy');
+    Route::get('/create', [EventController::class, 'create'])->name('create');
+    Route::post('events', [EventController::class, 'store'])->name('store');
+    Route::get('show/{id}', [EventController::class, 'show'])->name('show');
+    Route::get('edit/{id}', [EventController::class, 'edit'])->name('edit');
+    Route::put('update/{id}', [EventController::class, 'update'])->name('update');
+    Route::delete('events/deleteAll', [EventController::class, 'deleteAll'])->name('deleteAll');
+    Route::get('events/search', [EventController::class, 'search'])->name('search');
+});
+
+Route::group(['prefix' => 'admin/categoryevent', 'as' => 'admin.categoryevent.', 'middleware' => 'admin'], function () {
+    Route::resource('categoryevent', CategorieController::class);
+    Route::post('categoryevent/{categoryevent}', [CategorieController::class, 'destroy'])->name('destroy');
+    Route::get('categoryevent/create', [CategorieController::class, 'create'])->name('create');
+    Route::post('categoryevent', [CategorieController::class, 'store'])->name('store');
+    Route::post('', [CategorieController::class, 'edit'])->name('edit');
+    Route::post('deleteAll', [CategorieController::class, 'deleteAll'])->name('deleteAll');
+    Route::get('search', [CategorieController::class, 'search'])->name('search');
 });
 
 
@@ -144,6 +170,55 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('product', ['as' => 'product', 'uses' => 'App\Http\Controllers\frontoffice\TestController@product']);
     Route::get('events', ['as' => 'product', 'uses' => 'App\Http\Controllers\frontoffice\TestController@events']);
 });
+
+
+////////////////////////******************Start E V E N T S********************////////////////////////////////////////
+
+//Backoffice
+
+/*
+Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::resource('events', EventController::class);
+
+    Route::post('events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+    Route::get('events/create', [EventController::class, 'create'])->name('events.create');
+    Route::post('events', [EventController::class, 'store'])->name('events.store');
+    Route::delete('events/deleteAll', [EventController::class, 'deleteAll'])->name('events.deleteAll');
+    Route::get('events/search', [EventController::class, 'search'])->name('events.search');
+});*/
+
+
+Route::middleware(['web'])->group(function () {
+    /*Route::resource('/admin/events', EventController::class);
+
+    Route::post('/admin/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
+    Route::get('/admin/events/create', [EventController::class, 'create'])->name('events.create');
+    Route::post('/admin/events', [EventController::class, 'store'])->name('events.store');
+    Route::delete('/admin/events/deleteAll',[EventController::class, 'deleteAll'])->name('events.deleteAll');
+    Route::get('/admin/events/search', [EventController::class, 'search'])->name('events.search');
+    Route::get('/get-google-meet-link', [EventController::class, 'generateGoogleMeetLink'])->name('events.generateGoogleMeetLink');
+
+    Route::resource('/admin/category', CategorieController::class);
+
+    Route::post('/admin/category/{event}', [CategorieController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/admin/category/create', [CategorieController::class, 'create'])->name('categories.create');
+    Route::post('/admin/category', [CategorieController::class, 'store'])->name('categories.store');
+    Route::post('/admin/category/deleteAll', [App\Http\Controllers\events\CategorieController::class, 'deleteAll'])->name('categories.deleteAll');
+    Route::get('/admin/category/search', [CategorieController::class, 'search'])->name('categories.search');
+    */
+});
+
+
+//Frontoffice
+Route::group(['prefix' => 'events', 'as' => 'event.', 'middleware' => 'auth'], function () {
+    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\frontoffice\EventController@listEvents']);
+    Route::get('join/{event}', ['as' => 'join', 'uses' => 'App\Http\Controllers\frontoffice\EventController@joinEvent']);
+    Route::get('cancelJoin/{event}', ['as' => 'cancelJoin', 'uses' => 'App\Http\Controllers\frontoffice\EventController@cancelJoin']);
+    Route::get('detail/{event}', ['as' => 'detail', 'uses' => 'App\Http\Controllers\frontoffice\EventController@detail']);
+});
+
+
+/////////////////////////******************End E V E N T S********************////////////////////////////////////////
 
 Route::group([ 'middleware' => 'auth'], function () {
     Route::get('/unauthorized', ['as' => 'unauthorized', 'uses' => 'App\Http\Controllers\frontoffice\UtilPagesController@unauthorized']);

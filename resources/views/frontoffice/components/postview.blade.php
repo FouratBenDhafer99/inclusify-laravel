@@ -10,7 +10,7 @@
                     @csrf
                     @method("delete")
                     <button type="submit" class="btn">
-                    <i class="ti-trash text-grey-900 btn-round-md bg-red-gradiant font-xss"></i>
+                        <i class="ti-trash text-grey-900 btn-round-md bg-red-gradiant font-xss"></i>
                     </button>
                 </form>
             </div>
@@ -43,9 +43,12 @@
     @endif
     <div class="card-body d-block p-0 mb-3">
         <div class="row ps-2 pe-2">
-            <div class="col-sm-12 p-1"><img
-                    src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    class="rounded-3 w-100" alt="post"/></div>
+            <div class="col-sm-12 p-1">
+                @if ($post->images)
+                    <img src="{{ asset('/' . $post->images) }}" class="rounded-3 w-100" alt="post image">
+                @endif
+            </div>
+
         </div>
     </div>
     <div class="card-body d-flex p-0">
