@@ -61,7 +61,7 @@ Route::group(['prefix'=>'admin/users', 'as'=>'admin.user.', 'middleware' => 'adm
 
 Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'admin'], function () {
     Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
-//    Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
+    Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\SkillController@addSkill']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);

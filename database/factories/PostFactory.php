@@ -18,7 +18,6 @@ class PostFactory extends Factory
     {
         return [
             'description' => $this->faker->name(20),
-            'images' => $this->faker->randomLetter,
             'created_by' => 1
 
         ];
