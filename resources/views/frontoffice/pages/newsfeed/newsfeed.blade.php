@@ -2,6 +2,7 @@
 @section('page_title', 'Newsfeed')
 @section('content')
     <div class="">
+        <a href="{{route("newsfeed.exportpdf")}}" class="btn btn-primary">Generate PDF</a>
         <div class="middle-sidebar-bottom">
             <div class="middle-sidebar-left">
                 <div class="row feed-body">

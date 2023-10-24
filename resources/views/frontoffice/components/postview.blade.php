@@ -1,5 +1,7 @@
 <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3">
     <div class="card-body p-0 d-flex">
+
+
         <figure class="avatar me-3"><img src="{{ asset('frontoffice') }}/images/user.png" alt="avater"
                                          class="shadow-sm rounded-circle w45"/></figure>
         <h4 class="fw-700 text-grey-900 font-xssss mt-1"> {{$post->createdBy->name}} <span

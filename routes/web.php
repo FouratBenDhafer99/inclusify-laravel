@@ -90,6 +90,8 @@ Route::group(['prefix'=>'admin/questions', 'as'=>'admin.question.', 'middleware'
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\QuestionController@deleteQuestion']);
 });
 
+
+
 //Frontoffice
 Route::group(['prefix'=>'skills', 'as'=>'skill.', 'middleware' => 'auth'], function () {
     Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@listSkills']);
@@ -97,6 +99,9 @@ Route::group(['prefix'=>'skills', 'as'=>'skill.', 'middleware' => 'auth'], funct
     Route::get('play/{skillId}', ['as' => 'play_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@playQuiz']);
     Route::put('submit/{quizId}', ['as' => 'submit_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@submitQuiz']);
     Route::get('result/{quizId}', ['as' => 'result_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@resultQuiz']);
+
+
+
 });
 
 Route::group(['prefix'=>'newsfeed', 'as'=>'newsfeed.', 'middleware' => 'auth'], function () {
@@ -106,6 +111,9 @@ Route::group(['prefix'=>'newsfeed', 'as'=>'newsfeed.', 'middleware' => 'auth'], 
     Route::post('/addComment/{id}', ['as' => 'addComment', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@addComment']);
     Route::put('/update/{id}', ['as' => 'updatePost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@updatePost']);
     Route::delete('/{id}', ['as' => 'deletePost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@deletePost']);
+
+    Route::get('/pdf', ['as' => 'exportpdf', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@generateLePDF']);
+
 });
 
 

@@ -8,8 +8,11 @@ use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Redirect;
 
+use Barryvdh\DomPDF\Facade as PDF;
+
 class NewsfeedController extends Controller
 {
+
     public function index()
     {
 
@@ -83,6 +86,18 @@ class NewsfeedController extends Controller
         $post->delete();
 
         return redirect()->route('newsfeed');
+    }
+
+    public function generateLePDF()
+    {
+
+        dd("kaka");
+
+//        $data = ['some_data' => 'This is your data for the PDF'];
+
+//        $pdf = PDF::loadView('pdf', $data);
+//
+//        return $pdf->stream('document.pdf');
     }
 
 
