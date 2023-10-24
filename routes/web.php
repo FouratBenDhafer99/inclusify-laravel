@@ -40,8 +40,8 @@ Route::group(['prefix'=>'admin','middleware' => 'auth'], function () {
 		Route::get('upgrade', ['as' => 'pages.upgrade', 'uses' => 'App\Http\Controllers\backoffice\PageController@upgrade']);
 		Route::get('jobs', ['as' => 'jobs.list', 'uses' => 'App\Http\Controllers\JobController@index']);
 		Route::post('jobs', ['as' => 'jobs.store', 'uses' => 'App\Http\Controllers\JobController@store']);
-		Route::delete('jobs/{id}', 'JobController@destroy')->name('jobs.destroy');
-		Route::put('jobs/{id}', 'JobController@update')->name('jobs.update');
+		Route::delete('jobs/{id}', 'App\Http\Controllers\JobController@destroy')->name('jobs.Admindestroy');
+		Route::put('jobs/{id}', 'App\Http\Controllers\JobController@update')->name('jobs.Adminupdate');
 		Route::get('jobApplications', ['as' => 'jobs.jobAppList', 'uses' => 'App\Http\Controllers\JobApplicationController@index']);
 });
 
@@ -61,7 +61,7 @@ Route::group(['prefix'=>'admin/users', 'as'=>'admin.user.', 'middleware' => 'adm
 
 Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'admin'], function () {
     Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
-//    Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
+    Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\SkillController@addSkill']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);

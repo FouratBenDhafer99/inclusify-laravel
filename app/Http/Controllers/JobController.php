@@ -50,8 +50,10 @@ class JobController extends Controller
 
         $job = Job::findOrFail($id);
         $job->update($data);
+        
+        return redirect()->route('jobs.list', $job->id)->with('success', 'Job updated successfully');
+        //return redirect()->route('jobs.list')->with('success', 'Job updated successfully');
 
-        return redirect()->route('jobs.index', $job->id)->with('success', 'Job updated successfully');
     }
 
 
@@ -62,12 +64,12 @@ class JobController extends Controller
         $job = Job::find($id);
 
         if (!$job) {
-            return redirect()->route('jobs.index')->with('error', 'Job not found');
+            return redirect()->route('jobs.list')->with('error', 'Job not found');
         }
 
         $job->delete();
 
-        return redirect()->route('jobs.index')->with('success', 'Job deleted successfully');
+        return redirect()->route('jobs.list')->with('success', 'Job deleted successfully');
     }
 
     ///front office 
@@ -144,6 +146,13 @@ class JobController extends Controller
         $job->update($data);
 
         return redirect()->route('jobs.jobsByConnectedUser', $job->id)->with('success', 'Job updated successfully');
+    }
+
+    public function search (Request $request)
+    {
+        $search = $request->get('search');
+        $jobs = Job::where('title', 'like', '%'.$search.'%')->get();
+        return view('frontOffice.pages.job.jobslist', compact('jobs'));
     }
 
 }

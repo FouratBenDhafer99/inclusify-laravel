@@ -90,28 +90,21 @@
                                 <td>{{ $job->salaryRange }}</td>
                                 <td>{{ $job->company }}</td>
                                 <td>{{ $job->address }}</td>
-                                <td><Button class="btn btn-primari " style="margin:10px" data-toggle="modal" data-target="#editJobModal"><i class="fas fa-edit fa-lg"></i></Button><Button class="btn btn-primari " data-toggle="modal" data-target="#delJobModal"><i class="fas fa-trash fa-lg"></i></Button></td>
+                                <td><Button class="btn btn-primari " style="margin:10px" data-toggle="modal" data-target="#editJobModal_{{ $job['id'] }}"><i class="fas fa-edit fa-lg"></i></Button><Button class="btn btn-primari " data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $job['id'] }}"><i class="fas fa-trash fa-lg"></i></Button></td>
                             </tr>
-                            @endforeach
-                          </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal fade" id="delJobModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal_{{ $job['id'] }}" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="padding: 20px; display: flex; justify-content: center;">
-                        <form style=" display: flex; justify-content: center; flex-direction:column" method="POST" action="{{ route('jobs.destroy', $job->id) }}">
+                        <form style=" display: flex; justify-content: center; flex-direction:column" method="POST"  action="{{ route('jobs.Admindestroy', $job->id) }}">
                             @csrf
                             @method('DELETE')
                             <p style="color: #808080;" >Are you sure you want to delete this job?</p>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-sm btn-danger rounded-xl m-1 ">Delete</button>
                         </form>
                     </div>
                 </div>
             </div>
-            <!-- Edit Modal -->
-            <div class="modal fade" id="editJobModal" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editJobModal_{{ $job['id'] }}" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -121,7 +114,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('jobs.update', $job->id) }}">
+                <form method="POST" action="{{ route('jobs.Adminupdate', $job->id) }}">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -157,6 +150,15 @@
         </div>
     </div>
 </div>
+
+                            @endforeach
+                          </tbody>
+                    </table>
+                </div>
+            </div>
+         
+            <!-- Edit Modal -->
+            
             <div class="card-footer py-4">
                 <nav class="d-flex justify-content-end" aria-label="...">
 
@@ -166,6 +168,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
 
     <script>
     $(document).ready(function() {

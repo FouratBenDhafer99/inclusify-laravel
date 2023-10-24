@@ -2,6 +2,11 @@
 
 @section('content')
 <div class="">
+@if(session('success'))
+                <div id="myAlert" class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
    
             <div class=" ">
                 <div class="col-xl-8 col-xxl-9 col-lg-8 ">
@@ -12,18 +17,18 @@
                         <div class="card border-0 mb-3 shadow-xss bg-white rounded-3 pe-4 pt-4 pb-4 " style="padding-left: 20px; width:100% margin:20px;">
                             <div class="d-column">
                                 <i class="feather-bookmark font-md text-grey-500 position-absolute right-0 me-3"></i>
-                                <h4 class="font-xss fw-700 text-grey-900 mb-3 pe-4">{{ $value['title'] }} <span class="font-xssss fw-500 text-grey-500 ms-4">({{ $value['date'] }})</span></h4>
+                                <h4 class="font-xss fw-700 text-grey-900 mb-3 pe-4">{{ $value['title'] }} <span class="font-xssss fw-500 text-grey-500 ms-4">({{$value['created_at']->format('Y-m-d')  }})</span></h4>
                                 <h5 class="font-xssss mb-2 text-grey-500 fw-600"><span class="text-grey-900 font-xssss text-dark">Location : </span> {{ $value['address'] }}</h5>
                                 <h5 class="font-xssss mb-2 text-grey-500 fw-600"><span class="text-grey-900 font-xssss text-dark">Company : </span>{{ $value['company'] }}</h5>
                                 <h5 class="font-xssss text-grey-500 fw-600 mb-3"><span class="text-grey-900 font-xssss text-dark">Salary : </span> {{ $value['salaryRange'] }}</h5>
                                 <a  class="position-absolute bottom-15 mb-3 right-15 rounded-xl font-xss btn btn-primary text-white" href="{{ route('jobApplicationslist', ['jobId' => $value['id']]) }}">see applications</a>
-                                <Button class="btn btn-primari " style="margin:10px" data-bs-toggle="modal" data-bs-target="#editModal"><i class="fas fa-edit fa-lg"></i></Button> 
-                                <Button  class="btn btn-sm btn-primari" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fas fa-trash fa-lg"></i></Button>
+                                <Button class="btn btn-primari " style="margin:10px" data-bs-toggle="modal" data-bs-target="#editModal_{{ $value['id'] }}"><i class="fas fa-edit fa-lg"></i></Button> 
+                                <Button  class="btn btn-sm btn-primari" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $value['id'] }}"><i class="fas fa-trash fa-lg"></i></Button>
 
                             </div>   
                             </div> 
                             </div> 
-                            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="deleteModal_{{ $value['id'] }}" tabindex="-1" role="dialog" aria-labelledby="delJobModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content" style="padding: 20px; display: flex; justify-content: center;">
                         <form style=" display: flex; justify-content: center; flex-direction:column" method="POST"  action="{{ route('jobs.destroyFront', $value->id) }}">
@@ -36,7 +41,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel" aria-hidden="true">
+            <div class="modal fade" id="editModal_{{ $value['id'] }}" tabindex="-1" role="dialog" aria-labelledby="editJobModalLabel" aria-hidden="true">
      <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary-gradiant">
@@ -86,7 +91,9 @@
                         @endforeach                    
                     </div>
                 </div>     
-            </div>    
+            </div>
+            
+           
 </div>
 <!-- delete Modal -->
             
@@ -98,5 +105,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+    $(document).ready(function() {
+        $("#myAlert").fadeIn();
+
+        setTimeout(function() {
+            $("#myAlert").fadeOut();
+        }, 2000);
+    });
+</script>
 
 @endsection
