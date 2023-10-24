@@ -61,7 +61,7 @@ Route::group(['prefix'=>'admin/users', 'as'=>'admin.user.', 'middleware' => 'adm
 
 Route::group(['prefix'=>'admin/skills', 'as'=>'admin.skill.', 'middleware' => 'admin'], function () {
     Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillList']);
-    Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
+//    Route::view('', 'backoffice.pages.skills.skill_list', ['skills' => Skill::all()])->name('list');
     Route::get('form/{id?}', ['as' => 'form', 'uses' => 'App\Http\Controllers\backoffice\SkillController@skillForm']);
     Route::post('add', ['as' => 'add', 'uses' => 'App\Http\Controllers\backoffice\SkillController@addSkill']);
     Route::put('update/{id}', ['as' => 'update', 'uses' => 'App\Http\Controllers\backoffice\SkillController@updateSkill']);
@@ -77,7 +77,7 @@ Route::group(['prefix'=>'admin/categories', 'as'=>'admin.category.', 'middleware
 });
 
 Route::group(['prefix'=>'admin/products', 'as'=>'admin.product.', 'middleware' => 'admin'], function () {
-//    Route::view('', 'backoffice.pages.products.product_list', ['products' => Product::all()])->name('list');
+    Route::view('', 'backoffice.pages.products.product_list', ['products' => Product::all()])->name('list');
     Route::get('delete/{id}', ['as' => 'delete', 'uses' => 'App\Http\Controllers\backoffice\ProductController@deleteProduct']);
 });
 
@@ -101,6 +101,10 @@ Route::group(['prefix'=>'skills', 'as'=>'skill.', 'middleware' => 'auth'], funct
 
 Route::group(['prefix'=>'newsfeed', 'as'=>'newsfeed.', 'middleware' => 'auth'], function () {
     Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@index']);
+    Route::post('', ['as' => 'addPost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@addPost']);
+    Route::get('/{id}', ['as' => 'detail', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@postdetails']);
+    Route::post('/addComment/{id}', ['as' => 'addComment', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@addComment']);
+    Route::put('/update/{id}', ['as' => 'updatePost', 'uses' => 'App\Http\Controllers\frontoffice\NewsfeedController@updatePost']);
 //    Route::get('', ['as' => 'list', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@listSkills']);
 //    Route::get('start/{skillId}', ['as' => 'start_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@startQuiz']);
 //    Route::get('play/{skillId}', ['as' => 'play_quiz', 'uses' => 'App\Http\Controllers\frontoffice\SkillController@playQuiz']);

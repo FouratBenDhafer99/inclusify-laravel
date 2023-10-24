@@ -3,20 +3,55 @@
 namespace App\Http\Controllers\frontoffice;
 
 use \App\Http\Controllers\Controller;
+use App\Http\Requests\CommentRequest;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 
 class NewsfeedController extends Controller
 {
     public function index()
     {
-//        $posts=[
-//            (object)["id"=>"33", "postvideo"=>"", "postimage"=>"post.png", "avater"=>"user.png", 'user'=>"Anthony Daugloi", 'time'=>"2 hour ago", "des"=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus."],
-//            (object)["id"=>"33", "postvideo"=>"", "postimage"=>"post.png", "avater"=>"user.png", 'user'=>"Anthony Daugloi", 'time'=>"2 hour ago", "des"=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus."],
-//            (object)["id"=>"33", "postvideo"=>"", "postimage"=>"post.png", "avater"=>"user.png", 'user'=>"Anthony Daugloi", 'time'=>"2 hour ago", "des"=>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nulla dolor, ornare at commodo non, feugiat non nisi. Phasellus faucibus mollis pharetra. Proin blandit ac massa sed rhoncus."],
-//        ];
-        $posts = Post::all();
+        $posts = Post::orderByDesc("updated_at")->get();
 //        dd($posts);
-
-        return view('frontoffice.pages.base.newsfeed', ['posts'=>$posts]);
+        $singlePostDetail = false;
+        return view('frontoffice.pages.newsfeed.newsfeed', ['posts'=>$posts, 'singlePostDetail'=> $singlePostDetail]);
     }
+
+    public function addPost(PostRequest $postRequest){
+        Post::create(["description"=> $postRequest->description]);
+
+        return back()->withStatus(__('Skill successfully added.'));
+
+    }
+
+    public function postdetails($postId){
+        $post = Post::find($postId);
+//        Post::create(["description"=> $postRequest->description]);
+//
+        $singlePostDetail = true;
+        return view('frontoffice.pages.newsfeed.postdetails', ['post'=>$post, 'singlePostDetail'=> $singlePostDetail]);
+
+    }
+
+    public function addComment(CommentRequest $commentRequest, $id){
+        $post  = Post::find($id);
+
+        $post->comments()->create(["comment"=>$commentRequest->comment]);
+
+        return back()->withStatus(__('Skill successfully added.'));
+
+    }
+
+    public function updatePost(PostRequest $request, $postId)
+    {
+        $post = Post::findOrFail($postId);
+
+        $post->update([
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('newsfeed.detail', $postId);
+    }
+
+
 }
